@@ -12,6 +12,11 @@ Um livro possui:
 
 Gabriel tem que ser capaz de adicionar novos gêneros e autores para usar no cadastro de livros. 
 
-Obs01.: o nome da branch deve seguir o seguinte padrão: nome-sobrenome.
+Obs.: instância do SQL Server deve estar conectado ao localhost
 
-Obs02.: instância do SQL Server deve estar conectado ao localhost
+Depois de implementar a solução, envie um pull request para este repositório pela interface do Github.
+
+O nome da branch deve seguir o seguinte padrão: **nome-sobrenome**.
+
+ATENÇÃO
+Não tente fazer o PUSH diretamente para ESTE repositório!
