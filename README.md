@@ -19,4 +19,4 @@ Depois de implementar a solução, envie um pull request para este repositório 
 O nome da branch deve seguir o seguinte padrão: **nome-sobrenome**.
 
 ATENÇÃO
-Não tente fazer o PUSH diretamente para ESTE repositório!
+Não tente fazer o PUSH diretamente para ESTA branch!
