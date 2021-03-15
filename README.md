@@ -20,3 +20,5 @@ O nome da branch deve seguir o seguinte padrão: **nome-sobrenome**.
 
 ATENÇÃO
 Não tente fazer o PUSH diretamente para ESTA branch!
+
+A data limite para entrega desse desafio é: 19/03/2021
