@@ -38,7 +38,7 @@ namespace DrCashChallenge.Data.Repositories
 
         public virtual async Task Create(TEntity entity)
         {
-            DbSet.Add(entity);
+            DbSet.Attach(entity);
             await SaveChanges();
         }
 

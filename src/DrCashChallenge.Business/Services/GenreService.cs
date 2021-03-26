@@ -1,7 +1,9 @@
-﻿using DrCashChallenge.Business.Interfaces.Services;
+﻿using System;
+using System.Threading.Tasks;
+using System.Linq;
+using DrCashChallenge.Business.Interfaces.Services;
 using DrCashChallenge.Business.Interfaces.Repositories;
 using DrCashChallenge.Business.Models;
-using System.Threading.Tasks;
 
 namespace DrCashChallenge.Business.Services
 {
@@ -17,7 +19,12 @@ namespace DrCashChallenge.Business.Services
 
         public async Task Create(Genre genre)
         {
-            await _genreRepository.Create(genre);
+            genre.Id = Guid.Empty;
+            var exists = await _genreRepository.Get(g => g.Name.Equals(genre.Name));
+            var genreDb = exists.FirstOrDefault(g => g.Name == genre.Name);
+            if (genreDb == null)
+                await _genreRepository.Create(genre);
+            else Notificate("Genre Already Exists");
         }
         public void Dispose()
         {

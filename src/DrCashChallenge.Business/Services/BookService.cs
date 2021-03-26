@@ -1,8 +1,9 @@
-﻿using DrCashChallenge.Business.Interfaces.Services;
+﻿using System;
+using System.Threading.Tasks;
+using System.Linq;
+using DrCashChallenge.Business.Interfaces.Services;
 using DrCashChallenge.Business.Interfaces.Repositories;
 using DrCashChallenge.Business.Models;
-using System;
-using System.Threading.Tasks;
 
 namespace DrCashChallenge.Business.Services
 {
@@ -18,6 +19,7 @@ namespace DrCashChallenge.Business.Services
 
         public async Task Create(Book book)
         {
+            book.Id = Guid.Empty;
             await _bookRepository.Create(book);
         }
 

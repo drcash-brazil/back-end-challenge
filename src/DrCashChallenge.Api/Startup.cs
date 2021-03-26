@@ -1,4 +1,3 @@
-using DrCashChallenge.Data.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -6,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using DrCashChallenge.Api.Configurations;
-using AutoMapper;
 
 namespace DrCashChallenge.Api
 {
@@ -23,8 +21,8 @@ namespace DrCashChallenge.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddContextConfiguration(Configuration);
-            AddMapper(services);
-
+            services.ResolveDependencies();
+            services.AddMapper();
             services.AddControllers();
 
             services.AddSwaggerGen(c =>
@@ -35,7 +33,7 @@ namespace DrCashChallenge.Api
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DrCashChallengeContext context)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -58,15 +56,5 @@ namespace DrCashChallenge.Api
             });
         }
 
-        private static void AddMapper(IServiceCollection services)
-        {
-            var mapperConfig = new MapperConfiguration(mc =>
-            {
-                mc.AddProfile(new MappingProfile());
-            });
-
-            IMapper mapper = mapperConfig.CreateMapper();
-            services.AddSingleton(mapper);
-        }
     }
 }

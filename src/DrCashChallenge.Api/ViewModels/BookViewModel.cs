@@ -14,7 +14,11 @@ namespace DrCashChallenge.Api.ViewModels
         [Required(ErrorMessage = "The field {0} is required")]
         [StringLength(255, ErrorMessage = "The field {0} must be between {2} and {1} characters", MinimumLength = 2)]
         public string Title { get; set; }
-        public AuthorViewModel AuthorViewModel { get; set; }
-        public GenreViewModel GenreViewModel { get; set; }
+
+        public int NumberOfCopies { get; set; }
+
+        public List<AuthorViewModel> Authors { get; set; }
+
+        public List<GenreViewModel> Genres { get; set; }
     }
 }

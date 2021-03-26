@@ -17,11 +17,7 @@ namespace DrCashChallenge.Data.Mappings
 
             builder.Property(g => g.Name)
                 .IsRequired()
-                .HasColumnType("text");
-                
-            builder.Property(g => g.LastName)
-            .IsRequired()
-            .HasColumnType("text");
+                .HasColumnType("varchar(max)");
 
             builder.ToTable("Authors");
         }

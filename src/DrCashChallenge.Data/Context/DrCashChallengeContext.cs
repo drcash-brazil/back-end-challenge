@@ -40,7 +40,7 @@ namespace DrCashChallenge.Data.Context
             {
                 if (entry.State == EntityState.Added)
                 {
-                    entry.Property("CreatedAt").CurrentValue = DateTime.Now;
+                    entry.Property("CreatedAt").CurrentValue = DateTime.Now.ToUniversalTime();
                 }
 
                 if (entry.State == EntityState.Modified)

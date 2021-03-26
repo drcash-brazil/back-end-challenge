@@ -40,5 +40,11 @@ namespace DrCashChallenge.Business.Services
             }
         }
 
+        protected void Notificate(string message)
+        {
+
+            _notificator.Handle(new Notification(message));
+        }
+
     }
 }

@@ -17,17 +17,17 @@ namespace DrCashChallenge.Data.Mappings
 
             builder.Property(l => l.Title)
                 .IsRequired()
-                .HasColumnType("text");
-
-            builder.HasMany(l => l.Genres)
-                .WithMany(g => g.Books);
-            
-            builder.HasMany(l => l.Authors)
-                .WithMany(a => a.Books);
+                .HasColumnType("varchar(max)");
 
             builder.Property(l => l.NumberOfCopies)
                 .IsRequired()
                 .HasColumnType("int");
+
+            builder.HasMany(l => l.Genres)
+                .WithMany(g => g.Books);
+
+            builder.HasMany(l => l.Authors)
+                .WithMany(a => a.Books);
 
             builder.ToTable("Books");
         }

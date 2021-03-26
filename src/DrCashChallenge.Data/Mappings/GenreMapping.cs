@@ -15,9 +15,9 @@ namespace DrCashChallenge.Data.Mappings
         {
             builder.HasKey(g => g.Id);
 
-            builder.Property(g => g.Description)
+            builder.Property(g => g.Name)
                 .IsRequired()
-                .HasColumnType("text");
+                .HasColumnType("varchar(max)");
 
             builder.ToTable("Genres");
         }

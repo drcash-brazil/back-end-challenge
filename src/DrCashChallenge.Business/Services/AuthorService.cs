@@ -1,11 +1,9 @@
-﻿using DrCashChallenge.Business.Interfaces.Services;
+﻿using System;
+using System.Threading.Tasks;
+using System.Linq;
+using DrCashChallenge.Business.Interfaces.Services;
 using DrCashChallenge.Business.Interfaces.Repositories;
 using DrCashChallenge.Business.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DrCashChallenge.Business.Services
 {
@@ -21,7 +19,12 @@ namespace DrCashChallenge.Business.Services
 
         public async Task Create(Author author)
         {
-            await _authorRepository.Create(author);
+            author.Id = Guid.Empty;
+            var exists = await _authorRepository.Get(a => a.Name.Equals(author.Name));
+            var authorDb = exists.FirstOrDefault(a => a.Name == author.Name);
+            if (authorDb == null)
+                await _authorRepository.Create(author);
+            else Notificate("Author Already Exists");
         }
         public void Dispose()
         {
