@@ -53,7 +53,7 @@ O processo de Pull Request funciona da seguinte maneira:
 4. Pela interface do Github, envie um Pull Request.
 5. Deixe o fork público para facilitar a inspeção do código.
 
-ATENÇÃO
-Não tente fazer o PUSH diretamente para ESTE repositório!
 
-A data limite para entrega desse desafio é: 19/03/2021
+Obs.: Não tente fazer o PUSH diretamente para ESTE repositório!
+
+**A data limite para entrega desse desafio é: 29/08/2021**
