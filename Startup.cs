@@ -29,7 +29,7 @@ namespace back_end_challenge
     public void ConfigureServices(IServiceCollection services)
     {
 
-      services.AddDbContext<CoreContext>(opt => opt.UseSqlServer(
+      services.AddDbContext<Context>(opt => opt.UseSqlServer(
         Configuration.GetConnectionString("CoreConnection"))
       );
       services.AddScoped<IBookRepo, SqlBooksRepo>();

@@ -6,8 +6,8 @@ namespace back_end_challenge.Data
 {
   public class SqlBooksRepo : IBookRepo
   {
-    public CoreContext _context { get; }
-    public SqlBooksRepo(CoreContext context)
+    public Context _context { get; }
+    public SqlBooksRepo(Context context)
     {
       _context = context;
     }
