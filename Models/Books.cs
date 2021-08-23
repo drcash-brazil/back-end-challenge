@@ -1,6 +1,6 @@
 namespace back_end_challenge.Models
 {
-  public class Livros
+  public class Books
   {
     public int Id { get; set; }
     public string Titulo { get; set; }
