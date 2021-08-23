@@ -32,6 +32,7 @@ namespace back_end_challenge
       services.AddDbContext<CoreContext>(opt => opt.UseSqlServer(
         Configuration.GetConnectionString("CoreConnection"))
       );
+      services.AddScoped<IBookRepo, SqlBooksRepo>();
 
       services.AddControllers();
       services.AddSwaggerGen(c =>
@@ -39,7 +40,6 @@ namespace back_end_challenge
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "back_end_challenge", Version = "v1" });
       });
 
-      services.AddScoped<IBookRepo, BooksMockRepo>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

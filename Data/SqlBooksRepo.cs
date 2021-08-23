@@ -12,7 +12,6 @@ namespace back_end_challenge.Data
       _context = context;
     }
 
-
     public Books GetBookById(int id)
     {
       return _context.Books.FirstOrDefault(x => x.Id == id);
