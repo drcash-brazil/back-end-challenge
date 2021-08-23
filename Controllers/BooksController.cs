@@ -9,7 +9,12 @@ namespace back_end_challenge.Controllers
   [ApiController]
   public class BooksController : ControllerBase
   {
-    private readonly BooksMockRepo _repository = new BooksMockRepo();
+    private readonly IBookRepo _repository;
+    public BooksController(IBookRepo repository)
+    {
+      _repository = repository;
+    }
+
     // GET api/books/
     [HttpGet]
     public ActionResult<IEnumerable<Books>> GetAllBooks()
