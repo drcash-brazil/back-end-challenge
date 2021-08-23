@@ -7,10 +7,8 @@ namespace back_end_challenge.Data
   {
     public CoreContext(DbContextOptions<CoreContext> opt) : base(opt)
     {
-
     }
 
     public DbSet<Books> Books { get; set; }
-
   }
 }

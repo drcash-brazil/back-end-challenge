@@ -12,9 +12,9 @@ namespace back_end_challenge.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Titulo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Autor = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Genero = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Titulo = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Autor = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Genero = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     NumCopias = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
