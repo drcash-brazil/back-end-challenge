@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using back_end_challenge.Models;
+
 namespace back_end_challenge.Data
 {
   public interface IBookRepo
   {
-    IEnumerable<IBookRepo> GetBooks();
+    IEnumerable<Books> GetBooks();
   }
 }
