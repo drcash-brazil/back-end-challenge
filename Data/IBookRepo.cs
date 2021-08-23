@@ -6,5 +6,6 @@ namespace back_end_challenge.Data
   public interface IBookRepo
   {
     IEnumerable<Books> GetBooks();
+    Books GetBookById(int id);
   }
 }
