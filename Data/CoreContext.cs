@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace back_end_challenge.Data
 {
-  public class Context : DbContext
+  public class CoreContext : DbContext
   {
-    public Context(DbContextOptions<Context> opt) : base(opt)
+    public CoreContext(DbContextOptions<CoreContext> opt) : base(opt)
     {
 
     }
