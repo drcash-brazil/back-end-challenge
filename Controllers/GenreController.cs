@@ -17,7 +17,7 @@ using Microsoft.Extensions.Logging;
 namespace BackEnd.Controllers
 {
             [ApiController]
-            [Route("[controller]")]
+           
             public class GenreController : ControllerBase
             {
                         private readonly IGenreRepository _genre;
@@ -28,36 +28,42 @@ namespace BackEnd.Controllers
                           _genre=genre;
                                     _logger = logger;
                         }
-                        [HttpGet("{page}/{limit}")]
+                        [HttpGet]
+                        [Route("/generous/{page}/{limit}")]
                         [Authorize(Roles = "user")]
-                        public async Task<ResponseView> get(int page,int limit)
+                        public async Task<ResponseView> Generous(int page,int limit)
                         {
                             return await _genre.get(page,limit);
                         }
-                        [HttpGet("{search}/{page}/{limit}")]
+                        [HttpGet]
+                         [Route("/generous/{search}/{page}/{limit}")]
                         [Authorize(Roles = "user")]
-                        public async Task<ResponseView> get(string search,int page,int limit)
+                        public async Task<ResponseView> Generous(string search,int page,int limit)
                         {
                             return await _genre.search(search,page,limit);
                         }
                         [HttpPost]
+                         [Route("/addGenre")]
                         [Authorize(Roles = "user")]
-                        public async Task<Response> add([FromBody] Generous obj)
+                        public async Task<Response> AddGenerous([FromBody] Generous obj)
                         {
                            return await _genre.add(obj);
                         }
-                        [HttpPut("{id}")]
+                        [HttpPut]
+                         [Route("/updateGenre")]
                         [Authorize(Roles = "user")]
-                        public async Task<Response> update(string id ,[FromBody] Generous obj)
+                        public async Task<Response> UpdateGenerous(string id ,[FromBody] Generous obj)
                         {
                             return await _genre.update(obj);
                         }
-                        [HttpDelete("{id}")]
+                        [HttpDelete]
+                        [Route("/deleteGenre/{id}")]
                         [Authorize(Roles = "user")]
-                        public async Task<Response> delete(string id)
+                        public async Task<Response> DeleteGenerous(string id)
                         {
                             return await _genre.delete(id);
                         }
 
             }
+
 }

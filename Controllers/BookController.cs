@@ -17,7 +17,7 @@ using Microsoft.Extensions.Logging;
 namespace BackEnd.Controllers
 {
             [ApiController]
-            [Route("[controller]")]
+           
             public class BookController : ControllerBase
             {
                         private readonly IBookRepository _book;
@@ -28,33 +28,38 @@ namespace BackEnd.Controllers
                                     _book=book;
                                     _logger = logger;
                         }
-                        [HttpGet("{page}/{limit}")]
+                        [HttpGet]
+                        [Route("/books/{page}/{limit}")]
                         [Authorize(Roles = "user")]
-                        public async Task<ResponseView> get(int page,int limit)
+                        public async Task<ResponseView> Books(int page,int limit)
                         {
                             return await _book.Books(page,limit);
                         }
-                        [HttpGet("{search}/{page}/{limit}")]
+                        [HttpGet]
+                        [Route("/books/{search}/{page}/{limit}")]
                         [Authorize(Roles = "user")]
-                        public async Task<ResponseView> get(string search,int page,int limit)
+                        public async Task<ResponseView> Books(string search,int page,int limit)
                         {
                             return await _book.SearchBooks(search,page,limit);
                         }
                         [HttpPost]
+                        [Route("/addBook")]
                         [Authorize(Roles = "user")]
-                        public async Task<Response> add([FromBody] Books obj)
+                        public async Task<Response> AddBook([FromBody] Books obj)
                         {
                            return  await _book.AddBook(obj);
                         }
                         [HttpPut]
+                         [Route("/updateBook")]
                         [Authorize(Roles = "user")]
-                        public async Task<Response> update([FromBody] Books obj)
+                        public async Task<Response> UpdateBook([FromBody] Books obj)
                         {
                           return await _book.update(obj);
                         }
-                        [HttpDelete("{id}")]
+                        [HttpDelete]
+                         [Route("/deleteBook/{id}")]
                         [Authorize(Roles = "user")]
-                        public async Task<Response> delete(string id)
+                        public async Task<Response> DeleteBook(string id)
                         {
                           return await _book.delete(id);
                         }

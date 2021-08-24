@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,6 +17,8 @@ namespace BackEnd.Models
         public virtual Authors authors{get;set;}
         [ForeignKey("genreId")]
         public virtual Generous generous{get;set;}
+        public ICollection<Movement> movement{get;set;}
+        public ICollection<OrderBooks> orderBooks{get;set;}
       
     }
 }

@@ -11,7 +11,8 @@ namespace BackEnd.DbConfig
         public DbSet<Authors> authors{get;set;}
         public DbSet<Books> books{get;set;}
         public DbSet<Generous> generous{get;set;}
-         public DbSet<Users> users{get;set;}
+        public DbSet<OrderBooks> orderBooks{get;set;}
+        public DbSet<Users> users{get;set;}
       
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -19,7 +20,8 @@ namespace BackEnd.DbConfig
             builder.ApplyConfiguration(new BookMap());
             builder.ApplyConfiguration(new GenreMap());
             builder.ApplyConfiguration(new UserMap());
-           
+            builder.ApplyConfiguration(new OrderBookMap());
+            builder.ApplyConfiguration(new MovementMap());
         }
     }
 }

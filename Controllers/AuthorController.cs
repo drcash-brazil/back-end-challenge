@@ -17,7 +17,7 @@ using Microsoft.Extensions.Logging;
 namespace BackEnd.Controllers
 {
             [ApiController]
-            [Route("[controller]")]
+           
             public class AuthorController : ControllerBase
             {
                         private readonly IAuthorRepository _author;
@@ -27,33 +27,38 @@ namespace BackEnd.Controllers
                                     _logger = logger;
                                     _author=author;
                         }
-                        [HttpGet("{page}/{limit}")]
+                        [HttpGet]
+                        [Route("/authors/{page}/{limit}")]
                         [Authorize(Roles = "user")]
-                        public async Task<ResponseView> get(int page,int limit)
+                        public async Task<ResponseView> Authors(int page,int limit)
                         {
                             return await _author.Authors(page,limit);
                         }
-                        [HttpGet("{search}/{page}/{limit}")]
+                        [HttpGet]
+                        [Route("/authors/{search}/{page}/{limit}")]
                         [Authorize(Roles = "user")]
-                        public async Task<ResponseView> get(string search,int page,int limit)
+                        public async Task<ResponseView> Authors(string search,int page,int limit)
                         {
                             return await _author.SearchAuthors(search,page,limit);
                         }
                         [HttpPost]
+                        [Route("/addAuthor")]
                         [Authorize(Roles = "user")]
-                        public async Task<Response> add([FromBody] Authors models)
+                        public async Task<Response> AddAuthor([FromBody] Authors models)
                         {
                            return await _author.add(models);
                         }
                         [HttpPut]
+                        [Route("/updateAuthor")]
                         [Authorize(Roles = "user")]
-                        public async Task<Response> update([FromBody] Authors obj)
+                        public async Task<Response> UpdateAuthor([FromBody] Authors obj)
                         {
                            return await _author.update(obj);
                         }
-                        [HttpDelete("{id}")]
+                        [HttpDelete]
+                        [Route("/deleteAuthor/{id}")]
                         [Authorize(Roles = "user")]
-                        public async Task<Response> delete(string id)
+                        public async Task<Response> DeleteAuthor(string id)
                         {
                           return await _author.delete(id);
                         }

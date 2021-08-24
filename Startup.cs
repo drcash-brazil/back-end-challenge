@@ -41,6 +41,7 @@ namespace BackEnd
                                     services.AddTransient<IBookRepository, BookRepository>();
                                     services.AddTransient<IAuthorRepository, AuthorRepository>();
                                     services.AddTransient<IGenreRepository, GenreRepository>();
+                                    services.AddTransient<IOrderBookRepository, OrderBookRepository>();
                                     services.AddTransient<IUserRepository, UserRepository>();
                                     services.AddTransient<ITokenService, TokenService>();
                                     services.AddSwaggerGen(c =>

@@ -30,8 +30,8 @@ namespace BackEnd.Controllers
                                  var token = _tokenService.GenerateToken(user);
                                  return new
                                  {
-                                             user = user,
-                                             token = token
+                                         user = user,
+                                         token = token
                                  };
                         }
                         [HttpPost]

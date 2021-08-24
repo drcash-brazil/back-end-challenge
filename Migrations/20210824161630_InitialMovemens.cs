@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BackEnd.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class InitialMovemens : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -71,6 +72,48 @@ namespace BackEnd.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "movement",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "VARCHAR(50)", maxLength: 50, nullable: false, defaultValueSql: "(newid())"),
+                    value = table.Column<double>(type: "FLOAT", nullable: false),
+                    quantity = table.Column<long>(type: "BIGINT", nullable: false),
+                    bookId = table.Column<string>(type: "VARCHAR(50)", maxLength: 50, nullable: true),
+                    dateCreated = table.Column<DateTime>(type: "DATETIME", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_movement", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_movement_books_bookId",
+                        column: x => x.bookId,
+                        principalTable: "books",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "orderBooks",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "VARCHAR(50)", maxLength: 50, nullable: false, defaultValueSql: "(newid())"),
+                    bookId = table.Column<string>(type: "VARCHAR(50)", maxLength: 50, nullable: false),
+                    status = table.Column<string>(type: "VARCHAR(50)", maxLength: 50, nullable: false, defaultValue: "In process"),
+                    orderDate = table.Column<DateTime>(type: "DATETIME", nullable: false),
+                    orderQuantity = table.Column<long>(type: "BIGINT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_orderBooks", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_orderBooks_books_bookId",
+                        column: x => x.bookId,
+                        principalTable: "books",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_books_authorId",
                 table: "books",
@@ -80,15 +123,31 @@ namespace BackEnd.Migrations
                 name: "IX_books_genreId",
                 table: "books",
                 column: "genreId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_movement_bookId",
+                table: "movement",
+                column: "bookId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_orderBooks_bookId",
+                table: "orderBooks",
+                column: "bookId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "books");
+                name: "movement");
+
+            migrationBuilder.DropTable(
+                name: "orderBooks");
 
             migrationBuilder.DropTable(
                 name: "users");
+
+            migrationBuilder.DropTable(
+                name: "books");
 
             migrationBuilder.DropTable(
                 name: "authors");
