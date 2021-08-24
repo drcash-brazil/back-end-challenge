@@ -29,8 +29,8 @@ namespace back_end_challenge.Controllers
     }
 
     //GET api/books/{id}
-    [HttpGet("{id}")]
-    public ActionResult<IEnumerable<BooksReadDto>> GetABookById(int id)
+    [HttpGet("{id}", Name = "GetBookById")]
+    public ActionResult<IEnumerable<BooksReadDto>> GetBookById(int id)
     {
       var bookItem = _repository.GetBookById(id);
       if (bookItem is null) return NotFound();
@@ -39,12 +39,15 @@ namespace back_end_challenge.Controllers
 
     //POST api/books/
     [HttpPost]
-    public ActionResult<BooksReadDto> CreateBooks(BooksCreateDto book)
+    public ActionResult<BooksReadDto> CreateBook(BooksCreateDto book)
     {
       var bookItem = _mapper.Map<Books>(book);
       _repository.CreateBook(bookItem);
       _repository.SavaChanges();
-      return Ok(bookItem);
+
+      var bookReadDto = _mapper.Map<BooksReadDto>(bookItem);
+
+      return CreatedAtRoute(nameof(GetBookById), new { Id = bookReadDto.Id }, bookReadDto);
     }
 
   }
