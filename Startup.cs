@@ -34,7 +34,7 @@ namespace back_end_challenge
       );
 
       services.AddControllers();
-      services.AddScoped<IBookRepo, SqlBooksRepo>();
+      services.AddScoped<IBookRepo, BooksRepo>();
       services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
       services.AddSwaggerGen(c =>

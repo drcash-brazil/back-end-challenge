@@ -5,10 +5,10 @@ using back_end_challenge.Models;
 
 namespace back_end_challenge.Repositories
 {
-  public class SqlBooksRepo : IBookRepo
+  public class BooksRepo : IBookRepo
   {
     public AppDbContext _context { get; }
-    public SqlBooksRepo(AppDbContext context)
+    public BooksRepo(AppDbContext context)
     {
       _context = context;
     }
