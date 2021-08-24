@@ -9,5 +9,6 @@ namespace back_end_challenge.Repositories
     IEnumerable<Books> GetBooks();
     Books GetBookById(int id);
     void CreateBook(Books book);
+    void UpdateBook(Books book);
   }
 }
