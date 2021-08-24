@@ -33,5 +33,10 @@ namespace back_end_challenge.Repositories
       if (book is null) throw new ArgumentNullException(nameof(book));
       _context.Add(book);
     }
+
+    public void UpdateBook(Books book)
+    {
+      // Do not have to do anything here
+    }
   }
 }

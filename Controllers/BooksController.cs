@@ -50,5 +50,20 @@ namespace back_end_challenge.Controllers
       return CreatedAtRoute(nameof(GetBookById), new { Id = bookReadDto.Id }, bookReadDto);
     }
 
+    //PUT api/books/{id}
+    [HttpPut("{id}")]
+    public ActionResult<BooksReadDto> UpdateBook(int id, BooksUpdateDto book)
+    {
+
+      var bookItem = _repository.GetBookById(id);
+      if (bookItem is null) return NotFound();
+
+      _mapper.Map(book, bookItem);
+      _repository.UpdateBook(bookItem);
+      _repository.SavaChanges();
+
+      // return CreatedAtRoute(nameof(GetBookById), new { Id = bookReadDto.Id }, bookReadDto);
+    }
+
   }
 }

@@ -10,6 +10,7 @@ namespace back_end_challenge.Profiles
     {
       CreateMap<Books, BooksReadDto>();
       CreateMap<BooksCreateDto, Books>();
+      CreateMap<BooksUpdateDto, Books>();
     }
   }
 }
