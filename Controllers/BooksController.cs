@@ -4,6 +4,7 @@ using back_end_challenge.Models;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using back_end_challenge.Dtos;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace back_end_challenge.Controllers
 {
@@ -64,6 +65,26 @@ namespace back_end_challenge.Controllers
 
       var bookReadDto = _mapper.Map<BooksReadDto>(bookItem);
       return CreatedAtRoute(nameof(GetBookById), new { Id = bookReadDto.Id }, bookReadDto);
+    }
+
+    //PATCH api/books/{id}
+    [HttpPatch("{id}")]
+    public ActionResult PartialBookUpdate(int id, JsonPatchDocument<BooksUpdateDto> patchDoc)
+    {
+      var bookItem = _repository.GetBookById(id);
+      if (bookItem is null) return NotFound();
+
+      var bookToPatch = _mapper.Map<BooksUpdateDto>(bookItem);
+      patchDoc.ApplyTo(bookToPatch, ModelState);
+
+      if (!TryValidateModel(bookToPatch))
+        return ValidationProblem(ModelState);
+
+      _mapper.Map(bookToPatch, bookItem);
+      _repository.UpdateBook(bookItem);
+      _repository.SavaChanges();
+
+      return NoContent();
     }
 
   }
