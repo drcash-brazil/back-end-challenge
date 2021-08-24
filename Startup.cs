@@ -36,11 +36,7 @@ namespace BackEnd
                         public void ConfigureServices(IServiceCollection services)
                         {
                                     services.AddCors();
-                                    // services.AddControllers();
-                                    services.AddControllers()
-                        .AddNewtonsoftJson(options =>
-    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-);
+                                    services.AddControllers().AddNewtonsoftJson(options =>options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
                                     services.AddDbContext<BackEndContext>(e => e.UseSqlServer(Configuration["ConnectionStrings:Connection"]));
                                     services.AddTransient<IBookRepository, BookRepository>();
                                     services.AddTransient<IAuthorRepository, AuthorRepository>();
@@ -77,18 +73,18 @@ namespace BackEnd
                                                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                                                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                                     })
-                                    .AddJwtBearer(x =>
-                                    {
-                                                x.RequireHttpsMetadata = false;
-                                                x.SaveToken = true;
-                                                x.TokenValidationParameters = new TokenValidationParameters
-                                                {
-                                                            ValidateIssuerSigningKey = true,
-                                                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["Secret"])),
-                                                            ValidateIssuer = false,
-                                                            ValidateAudience = false
-                                                };
-                                    });
+                                            .AddJwtBearer(x =>
+                                            {
+                                                        x.RequireHttpsMetadata = false;
+                                                        x.SaveToken = true;
+                                                        x.TokenValidationParameters = new TokenValidationParameters
+                                                        {
+                                                                    ValidateIssuerSigningKey = true,
+                                                                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["Secret"])),
+                                                                    ValidateIssuer = false,
+                                                                    ValidateAudience = false
+                                                        };
+                                            });
 
 
                         }

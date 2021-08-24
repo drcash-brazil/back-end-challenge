@@ -44,7 +44,7 @@ namespace BackEnd.Controllers
                         [Authorize(Roles = "user")]
                         public async Task<Response> add([FromBody] Books obj)
                         {
-                           return  await _book.add(obj);
+                           return  await _book.AddBook(obj);
                         }
                         [HttpPut]
                         [Authorize(Roles = "user")]
