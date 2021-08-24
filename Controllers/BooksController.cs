@@ -56,6 +56,7 @@ namespace back_end_challenge.Controllers
     {
 
       var bookItem = _repository.GetBookById(id);
+      if (bookItem is null) return NotFound();
 
       _mapper.Map(booksUpdateDto, bookItem);
       _repository.UpdateBook(bookItem);
