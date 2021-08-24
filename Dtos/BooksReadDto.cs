@@ -1,7 +1,7 @@
 
 namespace back_end_challenge.Dtos
 {
-  public class BooksReadDtos
+  public class BooksReadDto
   {
     public int Id { get; set; }
     public string Titulo { get; set; }
