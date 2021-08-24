@@ -98,7 +98,7 @@ namespace back_end_challenge.Controllers
       _repository.DeleteBook(bookItem);
       _repository.SavaChanges();
 
-      return NoContent();
+      return Ok();
     }
 
 
