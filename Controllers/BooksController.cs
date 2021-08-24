@@ -20,6 +20,7 @@ namespace back_end_challenge.Controllers
     public ActionResult<IEnumerable<Books>> GetAllBooks()
     {
       var bookItems = _repository.GetBooks();
+      if (bookItems is null) return NotFound();
       return Ok(bookItems);
     }
 
