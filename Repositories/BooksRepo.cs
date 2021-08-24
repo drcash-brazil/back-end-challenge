@@ -38,5 +38,11 @@ namespace back_end_challenge.Repositories
     {
       // Do not have to do anything here
     }
+
+    public void DeleteBook(Books book)
+    {
+      if (book is null) throw new ArgumentNullException(nameof(book));
+      _context.Books.Remove(book);
+    }
   }
 }
