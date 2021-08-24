@@ -69,7 +69,7 @@ namespace back_end_challenge.Controllers
 
     //PATCH api/books/{id}
     [HttpPatch("{id}")]
-    public ActionResult PartialBookUpdate(int id, JsonPatchDocument<BooksUpdateDto> patchDoc)
+    public ActionResult<BooksReadDto> PartialBookUpdate(int id, JsonPatchDocument<BooksUpdateDto> patchDoc)
     {
       var bookItem = _repository.GetBookById(id);
       if (bookItem is null) return NotFound();
@@ -84,7 +84,8 @@ namespace back_end_challenge.Controllers
       _repository.UpdateBook(bookItem);
       _repository.SavaChanges();
 
-      return NoContent();
+      var bookReadDto = _mapper.Map<BooksReadDto>(bookItem);
+      return CreatedAtRoute(nameof(GetBookById), new { Id = bookReadDto.Id }, bookReadDto);
     }
 
   }
