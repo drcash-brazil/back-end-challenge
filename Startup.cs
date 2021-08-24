@@ -32,10 +32,9 @@ namespace back_end_challenge
       services.AddDbContext<Context>(opt => opt.UseSqlServer(
         Configuration.GetConnectionString("CoreConnection"))
       );
-      services.AddScoped<IBookRepo, SqlBooksRepo>();
 
       services.AddControllers();
-
+      services.AddScoped<IBookRepo, SqlBooksRepo>();
       services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
       services.AddSwaggerGen(c =>
