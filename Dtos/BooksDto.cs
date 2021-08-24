@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace back_end_challenge.Dtos
 {
-  public class BooksCreateDto
+  public class BooksDto
   {
     [Required]
     [MaxLength(50)]

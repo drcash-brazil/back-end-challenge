@@ -40,7 +40,7 @@ namespace back_end_challenge.Controllers
 
     //POST api/books/
     [HttpPost]
-    public ActionResult<BooksReadDto> CreateBook(BooksCreateDto book)
+    public ActionResult<BooksReadDto> CreateBook(BooksDto book)
     {
       var bookItem = _mapper.Map<Books>(book);
       _repository.CreateBook(bookItem);
@@ -53,7 +53,7 @@ namespace back_end_challenge.Controllers
 
     //PUT api/books/{id}
     [HttpPut("{id}")]
-    public ActionResult<BooksReadDto> UpdateBook(int id, BooksUpdateDto booksUpdateDto)
+    public ActionResult<BooksReadDto> UpdateBook(int id, BooksDto booksUpdateDto)
     {
 
       var bookItem = _repository.GetBookById(id);
@@ -69,12 +69,12 @@ namespace back_end_challenge.Controllers
 
     //PATCH api/books/{id}
     [HttpPatch("{id}")]
-    public ActionResult<BooksReadDto> PartialBookUpdate(int id, JsonPatchDocument<BooksUpdateDto> patchDoc)
+    public ActionResult<BooksReadDto> PartialBookUpdate(int id, JsonPatchDocument<BooksDto> patchDoc)
     {
       var bookItem = _repository.GetBookById(id);
       if (bookItem is null) return NotFound();
 
-      var bookToPatch = _mapper.Map<BooksUpdateDto>(bookItem);
+      var bookToPatch = _mapper.Map<BooksDto>(bookItem);
       patchDoc.ApplyTo(bookToPatch, ModelState);
 
       if (!TryValidateModel(bookToPatch))
