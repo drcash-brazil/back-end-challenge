@@ -10,6 +10,7 @@ namespace back_end_challenge.Repositories
     Books GetBookById(int id);
     void CreateBook(Books book);
     void UpdateBook(Books book);
+    void DeleteBook(Books book);
 
   }
 }
