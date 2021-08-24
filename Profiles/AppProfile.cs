@@ -4,9 +4,9 @@ using back_end_challenge.Models;
 
 namespace back_end_challenge.Profiles
 {
-  public class BooksProfile : Profile
+  public class AppProfile : Profile
   {
-    public BooksProfile()
+    public AppProfile()
     {
       CreateMap<Books, BooksReadDto>();
     }
