@@ -88,5 +88,19 @@ namespace back_end_challenge.Controllers
       return CreatedAtRoute(nameof(GetBookById), new { Id = bookReadDto.Id }, bookReadDto);
     }
 
+    //DELETE api/books/{id}
+    [HttpDelete("{id}")]
+    public ActionResult DeleteBook(int id)
+    {
+      var bookItem = _repository.GetBookById(id);
+      if (bookItem is null) return NotFound();
+
+      _repository.DeleteBook(bookItem);
+      _repository.SavaChanges();
+
+      return NoContent();
+    }
+
+
   }
 }
