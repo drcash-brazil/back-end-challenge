@@ -5,7 +5,9 @@ namespace back_end_challenge.Repositories
 {
   public interface IBookRepo
   {
+    bool SavaChanges();
     IEnumerable<Books> GetBooks();
     Books GetBookById(int id);
+    void CreateBook(Books book);
   }
 }
