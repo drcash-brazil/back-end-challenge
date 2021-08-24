@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace back_end_challenge.Repositories
 {
-  public class Context : DbContext
+  public class AppDbContext : DbContext
   {
-    public Context(DbContextOptions<Context> opt) : base(opt)
+    public AppDbContext(DbContextOptions<AppDbContext> opt) : base(opt)
     {
     }
 

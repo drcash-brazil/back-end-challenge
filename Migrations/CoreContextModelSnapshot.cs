@@ -7,7 +7,7 @@ using back_end_challenge.Repositories;
 
 namespace back_end_challenge.Migrations
 {
-  [DbContext(typeof(Context))]
+  [DbContext(typeof(AppDbContext))]
   partial class CoreContextModelSnapshot : ModelSnapshot
   {
     protected override void BuildModel(ModelBuilder modelBuilder)

@@ -29,7 +29,7 @@ namespace back_end_challenge
     public void ConfigureServices(IServiceCollection services)
     {
 
-      services.AddDbContext<Context>(opt => opt.UseSqlServer(
+      services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(
         Configuration.GetConnectionString("CoreConnection"))
       );
 
