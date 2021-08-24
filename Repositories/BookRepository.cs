@@ -42,7 +42,7 @@ namespace BackEnd.Repositories
                         public async Task<Response> AddBook(Books obj)
                         {
                             var data=await get();
-                            var book= data.Where(e=>e.genreId==obj.genreId && e.title==obj.title).FirstOrDefault(); 
+                            var book= data.Where(e=>e.genreId==obj.genreId && e.title==obj.title && e.authorId==obj.authorId).FirstOrDefault(); 
                             if(book!=null)
                             {
                                 book.quantity=book.quantity+obj.quantity;
