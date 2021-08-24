@@ -20,7 +20,7 @@ namespace back_end_challenge.Repositories
 
     public IEnumerable<Books> GetBooks()
     {
-      return _context.Books.ToList();
+      return _context.Books.OrderByDescending(x => x.Id).ToList();
     }
 
     public bool SavaChanges()
