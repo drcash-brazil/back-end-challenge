@@ -35,6 +35,9 @@ namespace back_end_challenge
       services.AddScoped<IBookRepo, SqlBooksRepo>();
 
       services.AddControllers();
+
+      services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
       services.AddSwaggerGen(c =>
       {
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "back_end_challenge", Version = "v1" });
