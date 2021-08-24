@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using back_end_challenge.Models;
 
-namespace back_end_challenge.Data
+namespace back_end_challenge.Repositories
 {
   public class SqlBooksRepo : IBookRepo
   {

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using back_end_challenge.Data;
+using back_end_challenge.Repositories;
 using back_end_challenge.Models;
 using Microsoft.AspNetCore.Mvc;
 
