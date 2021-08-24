@@ -23,11 +23,12 @@ namespace back_end_challenge.Controllers
       return Ok(bookItems);
     }
 
-    // GET api/books/1
+    // GET api/books/{id}
     [HttpGet("{id}")]
     public ActionResult<IEnumerable<Books>> GetABookById(int id)
     {
       var bookItem = _repository.GetBookById(id);
+      if (bookItem is null) return NotFound();
       return Ok(bookItem);
     }
   }
