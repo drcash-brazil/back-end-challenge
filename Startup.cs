@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Serialization;
 
 namespace back_end_challenge
 {
@@ -33,7 +34,11 @@ namespace back_end_challenge
         Configuration.GetConnectionString("AppConnection"))
       );
 
-      services.AddControllers();
+      services.AddControllers().AddNewtonsoftJson(s =>
+      {
+        s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+      });
+
       services.AddScoped<IBookRepo, BooksRepo>();
       services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
