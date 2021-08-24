@@ -30,7 +30,7 @@ namespace back_end_challenge
     {
 
       services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(
-        Configuration.GetConnectionString("CoreConnection"))
+        Configuration.GetConnectionString("AppConnection"))
       );
 
       services.AddControllers();
