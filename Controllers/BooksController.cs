@@ -20,7 +20,7 @@ namespace back_end_challenge.Controllers
       _mapper = mapper;
     }
 
-    // GET api/books/
+    //GET api/books/
     [HttpGet]
     public ActionResult<IEnumerable<BooksReadDto>> GetAllBooks()
     {
@@ -28,14 +28,24 @@ namespace back_end_challenge.Controllers
       return Ok(_mapper.Map<IEnumerable<BooksReadDto>>(bookItems));
     }
 
-    // GET api/books/{id}
+    //GET api/books/{id}
     [HttpGet("{id}")]
     public ActionResult<IEnumerable<BooksReadDto>> GetABookById(int id)
     {
       var bookItem = _repository.GetBookById(id);
       if (bookItem is null) return NotFound();
       return Ok(_mapper.Map<BooksReadDto>(bookItem));
-      // return Ok(bookItem);
     }
+
+    //POST api/books/
+    [HttpPost]
+    public ActionResult<BooksReadDto> CreateBooks(BooksCreateDto book)
+    {
+      var bookItem = _mapper.Map<Books>(book);
+      _repository.CreateBook(bookItem);
+      _repository.SavaChanges();
+      return Ok(bookItem);
+    }
+
   }
 }

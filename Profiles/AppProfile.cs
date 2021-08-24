@@ -9,6 +9,7 @@ namespace back_end_challenge.Profiles
     public AppProfile()
     {
       CreateMap<Books, BooksReadDto>();
+      CreateMap<BooksCreateDto, Books>();
     }
   }
 }
