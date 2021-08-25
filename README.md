@@ -32,13 +32,19 @@ Gabriel tem que ser capaz de adicionar novos gêneros e autores para usar no cad
 
 **Atenção** - Informe quais recursos de terceriros foram utilizados no projeto e descreva o por quê.
 
+- Microsoft.EntityFrameworkCore: EF Core pode servir como um mapeado relacional de objeto (O/RM), que: Permite que os desenvolvedores do . NET trabalhem com um banco de dados usando objetos . NET.
+- Microsoft.EntityFramworkCore.SqlServer: Utilizado para realização da comunicação com o banco de dados SQL Server por meio de migrações.
+
 
 ## Experiência com o projeto 
-    # Descreva sua experiênca com o projeto, tanto na parte técnica quanto na parte teórica.
+	O desafio proporcionou uma interessante experiência com NET.Core até mesmo por ser meu segundo contato com o framework. A ideia de incluir mais de um autor e genero por livro, como por exemplo
+	o livro Ozob V.1 - Protocolo Molotov que possui autor e co-autor, bem como outros livros que são classificados por mais de um tipo de genero, torna o relacionamento entre as classes um ponto de 
+	atenção fundamental em entender com maior precisão a demanda de um software.
 
 ## Futuro
-
-Descreva sobre possíveis planos para este projeto, melhorias ou alterações que você realizaria em prol de aumentar a qualidade no desenvolvimento.
+	Apesar de ser apenas um desafio, o software que visa realizar a gestão de controle de livros de uma biblioteca pode ter grande potencial. Informações como "idioma", "região", "disponibilidade" entre outras
+	tornariam o controle dos livros ainda mais informativo ao responsável pela gestão da biblioteca. Funcionalidades como de compra e venda, ou aluguel dos livros pode tornar a experiencia com a nova ferramenta ainda mais 
+	satisfatória ao cliente.
 
 **ATENÇÃO**
 
