@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using back_end_challenge.IRepository;
 using back_end_challenge.Models;
 using back_end_challenge.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -43,13 +44,18 @@ namespace back_end_challenge
       services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
       services.AddScoped<IBookRepo, BooksRepo>();
+      services.AddTransient<IUnitOfWork, UnitOfWork>();
+
+      services.AddCors(o =>
+      {
+        o.AddPolicy("AllowAll", builder => builder.AllowAnyMethod().AllowAnyHeader());
+      });
       services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
       services.AddSwaggerGen(c =>
       {
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "back_end_challenge", Version = "v1" });
       });
-
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,6 +67,8 @@ namespace back_end_challenge
         app.UseSwagger();
         app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "back_end_challenge v1"));
       }
+
+      app.UseCors("AllowAll");
 
       app.UseHttpsRedirection();
 

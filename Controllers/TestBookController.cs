@@ -10,12 +10,12 @@ namespace back_end_challenge.Controllers
 {
   [Route("api/books")]
   [ApiController]
-  public class BooksController : ControllerBase
+  public class TestBookController : ControllerBase
   {
     private readonly IBookRepo _repository;
     private readonly IMapper _mapper;
 
-    public BooksController(IBookRepo repository, IMapper mapper)
+    public TestBookController(IBookRepo repository, IMapper mapper)
     {
       _repository = repository;
       _mapper = mapper;
