@@ -26,9 +26,11 @@ namespace BackEnd.Mappings
                                            .IsRequired()
                                            .HasColumnType("BIGINT");
                                    builder.Property(x => x.authorId)
-                                         
-                                           .HasMaxLength(50)
-                                           .HasColumnType("VARCHAR(50)");
+                                          .HasMaxLength(50)
+                                          .HasColumnType("VARCHAR(50)");
+                                   builder.Property(x => x.price)
+                                          .IsRequired()
+                                          .HasColumnType("FLOAT");      
                                    
                
                 

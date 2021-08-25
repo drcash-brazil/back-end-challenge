@@ -23,6 +23,9 @@ namespace BackEnd.Mappings
                                     builder.Property(x => x.bookId)
                                            .HasMaxLength(50)
                                            .HasColumnType("VARCHAR(50)");
+                                    builder.Property(x => x.operation)
+                                           .HasMaxLength(50)
+                                           .HasColumnType("VARCHAR(50)");       
                                     builder.Property(x => x.quantity)
                                            .IsRequired()
                                            .HasColumnType("BIGINT");

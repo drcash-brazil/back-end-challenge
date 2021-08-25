@@ -8,6 +8,7 @@ namespace BackEnd.Models
         public double value{get;set;}
         public long quantity{get;set;}
         public string bookId{get;set;}
+        public string operation{get;set;}
         public DateTime? dateCreated{get;set;}
         [ForeignKey("bookId")]
         public Books book {get;set;} 

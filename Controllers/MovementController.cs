@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using BackEnd.Interface;
 using BackEnd.Models;
@@ -20,23 +23,51 @@ namespace BackEnd.Controllers
                         [HttpGet]
                         [Route("/sales/{page}/{limit}")]
                         [Authorize(Roles = "user")]
+                        public async Task<ResponseView> Sales(int page,int limit)
+                        {
+                            return await _movement.Sales(page,limit);
+                        }
+                        [HttpGet]
+                        [Route("/searchSales/{search}/{page}/{limit}")]
+                        [Authorize(Roles = "user")]
+                        public async Task<ResponseView> Sales(string search,int page,int limit)
+                        {
+                            return await _movement.SearchSales(search,page,limit);
+                        }
+                        [HttpGet]
+                        [Route("/deposits/{page}/{limit}")]
+                        [Authorize(Roles = "user")]
+                        public async Task<ResponseView> Deposits(int page,int limit)
+                        {
+                            return await _movement.Deposits(page,limit);
+                        }
+                        [HttpGet]
+                        [Route("/searchDeposits/{search}/{page}/{limit}")]
+                        [Authorize(Roles = "user")]
+                        public async Task<ResponseView> Deposits(string search,int page,int limit)
+                        {
+                            return await _movement.SearchDeposits(search,page,limit);
+                        }
+                                                [HttpGet]
+                        [Route("/movements/{page}/{limit}")]
+                        [Authorize(Roles = "user")]
                         public async Task<ResponseView> Movements(int page,int limit)
                         {
                             return await _movement.get(page,limit);
                         }
                         [HttpGet]
-                        [Route("/searchSales/{search}/{page}/{limit}")]
+                        [Route("/searchMovements/{search}/{page}/{limit}")]
                         [Authorize(Roles = "user")]
                         public async Task<ResponseView> Movements(string search,int page,int limit)
                         {
                             return await _movement.search(search,page,limit);
                         }
                         [HttpPost]
-                        [Route("/addSales")]
+                        [Route("/addSale")]
                         [Authorize(Roles = "user")]
                         public async Task<Response> AddMovement([FromBody] Movement obj)
                         {
-                           return await _movement.add(obj);
+                           return await _movement.AddSale(obj);
                         }
 
                         [HttpDelete]

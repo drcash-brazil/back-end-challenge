@@ -12,6 +12,7 @@ namespace BackEnd.DbConfig
         public DbSet<Books> books{get;set;}
         public DbSet<Generous> generous{get;set;}
         public DbSet<OrderBooks> orderBooks{get;set;}
+        public DbSet<Movement> movement{get;set;}
         public DbSet<Users> users{get;set;}
       
         protected override void OnModelCreating(ModelBuilder builder)

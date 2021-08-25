@@ -13,6 +13,7 @@ namespace BackEnd.Models
         public string genreId{get;set;}
         [Required(ErrorMessage="quantity is required")]
         public long quantity{get;set;}
+        public double price{get;set;} 
         [ForeignKey("authorId")]
         public virtual Authors authors{get;set;}
         [ForeignKey("genreId")]

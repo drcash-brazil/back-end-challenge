@@ -1,59 +1,24 @@
-# Back-end challenge
-
-Seja bem-vindo ao repositório do projeto Bookstore, um caso de uso que deve ser implementado contendo uma versão para plataforma web. Obrigado por participar do desafio da Dr.Cash! Estamos muito contentes pelo seu primeiro passo para fazer parte de um time excepcional.
-
-## Afinal, o que é esse desafio?
-
-Primeiramente é importante se atentar aos pilares da Dr.Cash, seguindo metodologias de desenvolvimento ágil.
-
-- [Transparência] - Todo momento é momento para perguntar, tirar dúvidas e conversar sobre os processos e tarefas a serem executados, comunicação em primeiro lugar, sempre.
-
-- [Adaptabilidade] - Ofereça melhorias baseado em perspectivas e fundamentos, como também se adeque as normas impostas visando padrões já estipulados.
-
-- [Autonomia] - Ser autodidata, proativo e fidelidade na busca constante por conhecimento.
-
-## Desafio
-Gabriel é o dono de uma livraria e precisa de um software para fazer o controle do seu estoque de livros. Foi contratada uma empresa para implementar esse sistema e você é o desenvolvedor responsável pela implementação do back-end. 
-
-Deve ser criado uma Web API RESTful em Asp.NET Core, onde devem conter as rotas responsáveis pelo CRUD de livros. Essa api deve estar conectada a uma instância de banco de dados Microsoft SQL Server utilizando Entity Framework.
-
-Um livro possui: 
-*	Título
-*	Autor
-*	Gênero
-*	Quantidade de cópias
-
-Gabriel tem que ser capaz de adicionar novos gêneros e autores para usar no cadastro de livros. 
-
-### Obs.: instância do SQL Server deve estar conectado ao localhost
-
+## Requisito para rodar o sistema
+ **.Net Sdk na versão 5**
+ **Servidor SqlServer instalado**
+ **Ferramenta EF instalada**(Opcional)
+## Passos para execução
+  **dotnet build** - **para baixar algumas dependencia em falta na sua maquina.*
+  **criar uma base de dados com o nome desafio**
+  **comando para instalar a ferramenta EF** -**dotnet tool install --global dotnet-ef* 
+  **dotnet ef migrations add InitialMigration** -**caso voce tenha a ferramenta EF então pode correr este comando para ele gerar as migration das sua tabelas.*
+  **dotnet ef database update** - **caso voce tenha a ferramenta EF então pode correr este comando para ele gerar as tabela na sua base de dados.*
+  **dotnet run**  - **executar o projecto*.
+  Depois da execução poderais ter uma visão gerar das API nesta rota:**https://localhost:5001/swagger/index.html**
 ## Frameworks aplicadas no projeto
-
-
-**Atenção** - Informe quais recursos de terceriros foram utilizados no projeto e descreva o por quê.
-
-
+ **Microsoft.EntityFrameworkCore**
+## Recursos Utilizados
+ **Authentication.JwtBearer**  - **utilizamos este recurso para definimos segurança nas API.*
+ **EntityFrameworkCore.SqlServer** - **utilizamos este recurso para podemos conectar o nosso projecto com uma base de dados SqlServer* 
+ **dotnet ef migrations** - **utilizamos a ferramenta ef para podemos gerar a migration da nossa base de dados* 
 ## Experiência com o projeto 
-    # Descreva sua experiênca com o projeto, tanto na parte técnica quanto na parte teórica.
-
+ Concernete a este ponto não tenho muito para falar alem de disser que tive uma boa experiência tanto pratica quanto teorica .
 ## Futuro
-
-Descreva sobre possíveis planos para este projeto, melhorias ou alterações que você realizaria em prol de aumentar a qualidade no desenvolvimento.
-
-**ATENÇÃO**
-
-Depois de implementar a solução, envie um pull request para este repositório pela interface do Github.
-
-O nome da branch deve seguir o seguinte padrão: **nome-sobrenome**.
-
-O processo de Pull Request funciona da seguinte maneira:
-1. Faça um fork deste repositório (não clonar direto!);
-2. Faça seu projeto neste fork;
-3. Commit e suba as alterações para o SEU fork;
-4. Pela interface do Github, envie um Pull Request.
-5. Deixe o fork público para facilitar a inspeção do código.
-
-
-Obs.: Não tente fazer o PUSH diretamente para ESTE repositório!
-
-**A data limite para entrega desse desafio é: 29/08/2021**
+ No futoro espero ter que implementar o sistema de compra e venda online dos livro da livraria do Gabriel.
+## Obs
+ Casa tenha alguma duvida tem um arquivo na pasta do projeto com o nome: **Como utilizar a API**

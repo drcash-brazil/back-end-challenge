@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BackEnd.DbConfig;
 using BackEnd.Helper;
 using BackEnd.Interface;
+using BackEnd.Models;
 using BackEnd.Repositories;
 using BackEnd.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -38,11 +39,13 @@ namespace BackEnd
                                     services.AddCors();
                                     services.AddControllers().AddNewtonsoftJson(options =>options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
                                     services.AddDbContext<BackEndContext>(e => e.UseSqlServer(Configuration["ConnectionStrings:Connection"]));
+                                    services.AddTransient<IRepositoryBase<Movement>, RepositoryBase<Movement>>();
                                     services.AddTransient<IBookRepository, BookRepository>();
                                     services.AddTransient<IAuthorRepository, AuthorRepository>();
                                     services.AddTransient<IGenreRepository, GenreRepository>();
                                     services.AddTransient<IOrderBookRepository, OrderBookRepository>();
                                     services.AddTransient<IUserRepository, UserRepository>();
+                                    services.AddTransient<IMovementRepository, MovementRepository>();
                                     services.AddTransient<ITokenService, TokenService>();
                                     services.AddSwaggerGen(c =>
                                     {

@@ -53,6 +53,9 @@ namespace BackEnd.Migrations
                         .HasColumnType("VARCHAR(50)")
                         .HasMaxLength(50);
 
+                    b.Property<double>("price")
+                        .HasColumnType("FLOAT");
+
                     b.Property<long>("quantity")
                         .HasColumnType("BIGINT");
 
@@ -103,6 +106,10 @@ namespace BackEnd.Migrations
                     b.Property<DateTime?>("dateCreated")
                         .IsRequired()
                         .HasColumnType("DATETIME");
+
+                    b.Property<string>("operation")
+                        .HasColumnType("VARCHAR(50)")
+                        .HasMaxLength(50);
 
                     b.Property<long>("quantity")
                         .HasColumnType("BIGINT");
