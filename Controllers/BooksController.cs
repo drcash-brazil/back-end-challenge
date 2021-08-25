@@ -26,8 +26,8 @@ namespace back_end_challenge.Controllers
     public ActionResult<IEnumerable<BooksReadDto>> GetAllBooks()
     {
       var result = _repository.GetBooks();
-      // return Ok(_mapper.Map<IEnumerable<BooksReadDto>>(bookItems));
-      return Ok(result);
+      return Ok(_mapper.Map<IEnumerable<BooksReadDto>>(result));
+      // return Ok(result);
     }
 
     //GET api/books/{id}
@@ -36,8 +36,8 @@ namespace back_end_challenge.Controllers
     {
       var result = _repository.GetBookById(id);
       if (result is null) return NotFound();
-      // return Ok(_mapper.Map<BooksReadDto>(result));
-      return Ok(result);
+      return Ok(_mapper.Map<BooksReadDto>(result));
+      // return Ok(result);
     }
 
     //POST api/books/

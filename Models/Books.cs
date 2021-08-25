@@ -19,11 +19,11 @@ namespace back_end_challenge.Models
 
     [ForeignKey(nameof(Authors))]
     public int AutorId { get; set; }
-    public virtual Authors Authors { get; set; }
+    public Authors Authors { get; set; }
 
     [ForeignKey(nameof(Category))]
     public int CategoryId { get; set; }
-    public virtual Category Categories { get; set; }
+    public Category Categories { get; set; }
 
   }
 }
