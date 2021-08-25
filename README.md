@@ -42,8 +42,8 @@ Gabriel tem que ser capaz de adicionar novos gêneros e autores para usar no cad
 	atenção fundamental em entender com maior precisão a demanda de um software.
 
 ## Futuro
-	Apesar de ser apenas um desafio, o software que visa realizar a gestão de controle de livros de uma biblioteca pode ter grande potencial. Informações como "idioma", "região", "disponibilidade" entre outras
-	tornariam o controle dos livros ainda mais informativo ao responsável pela gestão da biblioteca. Funcionalidades como de compra e venda, ou aluguel dos livros pode tornar a experiencia com a nova ferramenta ainda mais 
+	Apesar de ser apenas um desafio, o software que visa realizar a gestão de controle de livros de uma biblioteca pode ter grande potencial. Informações como "idioma", "região", "disponibilidade", "Data de Publicação"
+	entre outras tornariam o controle dos livros ainda mais informativo ao responsável pela gestão da biblioteca. Funcionalidades como de compra e venda, ou aluguel dos livros pode tornar a experiencia com a nova ferramenta ainda mais 
 	satisfatória ao cliente.
 
 **ATENÇÃO**
