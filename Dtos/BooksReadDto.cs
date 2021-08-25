@@ -8,10 +8,7 @@ namespace back_end_challenge.Dtos
     public int Id { get; set; }
     public string Titulo { get; set; }
     public int NumCopias { get; set; }
-    // public int AutorId { get; set; }
-    public Authors Authors { get; set; }
-    // public int GeneroId { get; set; }
+    public AuthorReadDto Authors { get; set; }
     public CategoryReadDto Categories { get; set; }
-
   }
 }
