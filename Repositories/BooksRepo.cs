@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using back_end_challenge.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace back_end_challenge.Repositories
 {
@@ -15,12 +16,23 @@ namespace back_end_challenge.Repositories
 
     public Books GetBookById(int id)
     {
-      return _context.Books.FirstOrDefault(x => x.Id == id);
+      return _context.Books
+                  .Include(e => e.Authors)
+                  .Include(e => e.Categories)
+                  .AsNoTracking()
+                  .FirstOrDefault(x => x.Id == id);
     }
 
     public IEnumerable<Books> GetBooks()
     {
-      return _context.Books.OrderByDescending(x => x.Id).ToList();
+      var result = _context.Books
+                  .Include(e => e.Authors)
+                  .Include(e => e.Categories)
+                  .AsNoTracking()
+                  .ToList();
+      return result;
+      // return _context.Books
+      // .OrderByDescending(x => x.Id).ToList();
     }
 
     public bool SavaChanges()

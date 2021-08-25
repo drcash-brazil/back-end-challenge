@@ -13,8 +13,10 @@ namespace back_end_challenge.Dtos
     [Required]
     public int NumCopias { get; set; }
 
+    [Required]
     public int AutorId { get; set; }
 
-    public int GeneroId { get; set; }
+    [Required]
+    public int CategoryId { get; set; }
   }
 }

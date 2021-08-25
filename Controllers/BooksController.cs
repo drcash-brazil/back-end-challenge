@@ -25,17 +25,19 @@ namespace back_end_challenge.Controllers
     [HttpGet]
     public ActionResult<IEnumerable<BooksReadDto>> GetAllBooks()
     {
-      var bookItems = _repository.GetBooks();
-      return Ok(_mapper.Map<IEnumerable<BooksReadDto>>(bookItems));
+      var result = _repository.GetBooks();
+      // return Ok(_mapper.Map<IEnumerable<BooksReadDto>>(bookItems));
+      return Ok(result);
     }
 
     //GET api/books/{id}
     [HttpGet("{id}", Name = "GetBookById")]
     public ActionResult<IEnumerable<BooksReadDto>> GetBookById(int id)
     {
-      var bookItem = _repository.GetBookById(id);
-      if (bookItem is null) return NotFound();
-      return Ok(_mapper.Map<BooksReadDto>(bookItem));
+      var result = _repository.GetBookById(id);
+      if (result is null) return NotFound();
+      // return Ok(_mapper.Map<BooksReadDto>(result));
+      return Ok(result);
     }
 
     //POST api/books/
