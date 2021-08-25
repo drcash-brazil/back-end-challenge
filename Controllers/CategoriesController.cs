@@ -48,7 +48,7 @@ namespace back_end_challenge.Controllers
       try
       {
         var entity = await _unitOfWork.Categories.Get(x => x.Id == id, new List<string> { "Books" });
-        var result = _mapper.Map<BooksReadDto>(entity);
+        var result = _mapper.Map<CategoryReadDto>(entity);
         return Ok(result);
       }
       catch (Exception ex)
