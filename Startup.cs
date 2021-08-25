@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using back_end_challenge.Models;
 using back_end_challenge.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,7 +31,7 @@ namespace back_end_challenge
     public void ConfigureServices(IServiceCollection services)
     {
 
-      services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(
+      services.AddDbContext<DataContext>(opt => opt.UseSqlServer(
         Configuration.GetConnectionString("AppConnection"))
       );
 

@@ -7,8 +7,8 @@ namespace back_end_challenge.Repositories
 {
   public class BooksRepo : IBookRepo
   {
-    public AppDbContext _context { get; }
-    public BooksRepo(AppDbContext context)
+    public DataContext _context { get; }
+    public BooksRepo(DataContext context)
     {
       _context = context;
     }

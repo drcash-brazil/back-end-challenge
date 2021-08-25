@@ -1,24 +1,29 @@
+using System.ComponentModel.DataAnnotations.Schema;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace back_end_challenge.Models
 {
   public class Books
   {
+    [Key]
     public int Id { get; set; }
+
     [Required]
-    [MaxLength(50)]
+    [MaxLength(50, ErrorMessage = "This field must have only 50 character.")]
+    [MinLength(3, ErrorMessage = "This field must have at least 3 character.")]
     public string Titulo { get; set; }
 
     [Required]
-    [MaxLength(100)]
-    public string Autor { get; set; }
-
-    [Required]
-    [MaxLength(20)]
-    public string Genero { get; set; }
-
-    [Required]
     public int NumCopias { get; set; }
+
+    [ForeignKey(nameof(Authors))]
+    public int AutorId { get; set; }
+    public Authors Autor { get; set; }
+
+    [ForeignKey(nameof(Category))]
+    public int GeneroId { get; set; }
+    public Category Genero { get; set; }
 
   }
 }
