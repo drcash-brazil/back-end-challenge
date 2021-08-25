@@ -7,10 +7,9 @@ namespace BackEnd.Interface
     {
        Task<Response> AddSale(Movement obj);
      
-       Task<ResponseView> Sales(int page = 0, int limit = 0);
-       Task<ResponseView> Deposits(int page = 0, int limit = 0);
-       
-       Task<ResponseView> SearchSales(string search, int page = 0, int limit = 0);
-       Task<ResponseView> SearchDeposits(string search, int page = 0, int limit = 0);
+       Task<ResponseView> Sales(string _search=null,int page = 0, int limit = 0);
+       Task<ResponseView> Deposits(string _search=null,int page = 0, int limit = 0);
+       Task<ResponseView> Movements(string _search=null,int page = 0, int limit = 0);
+      
     }
 }

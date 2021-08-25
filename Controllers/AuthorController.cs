@@ -28,19 +28,13 @@ namespace BackEnd.Controllers
                                     _author=author;
                         }
                         [HttpGet]
-                        [Route("/authors/{page}/{limit}")]
-                        [Authorize(Roles = "user")]
-                        public async Task<ResponseView> Authors(int page,int limit)
-                        {
-                            return await _author.Authors(page,limit);
-                        }
-                        [HttpGet]
                         [Route("/authors/{search}/{page}/{limit}")]
                         [Authorize(Roles = "user")]
-                        public async Task<ResponseView> Authors(string search,int page,int limit)
+                        public async Task<ResponseView> Authors(int page,int limit,string search=null)
                         {
-                            return await _author.SearchAuthors(search,page,limit);
+                            return await _author.Authors(search,page,limit);
                         }
+
                         [HttpPost]
                         [Route("/addAuthor")]
                         [Authorize(Roles = "user")]

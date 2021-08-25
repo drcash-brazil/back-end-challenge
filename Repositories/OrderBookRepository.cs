@@ -15,9 +15,9 @@ namespace BackEnd.Repositories
                                     _book = book;
                                     _context = context;
                         }
-                        public async Task<ResponseView> OrderBooks(int page, int limit)
+                        public async Task<ResponseView> OrderBooks(int page=0, int limit=0,string _search=null)
                         {
-                                    var orders = await get();
+                                    var orders =_search=="null"? await get():await search(_search);
                                     var result = limit != 0 ? orders.Skip(page).Take(limit) : orders;
                                     return new ResponseView { data = result, page = page, limit = limit, totalPage = limit != 0 ? orders.Count / limit : 1, total = orders.Count };
                         }

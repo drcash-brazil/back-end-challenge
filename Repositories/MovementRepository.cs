@@ -19,51 +19,44 @@ namespace BackEnd.Repositories
                                     _book = book;
                                     _context = context;
                         }
-                        public async Task<ResponseView> Sales(int page = 0, int limit = 0)
+                        public async Task<ResponseView> Sales(string _search=null,int page = 0, int limit = 0)
                         {
-                                    var data = await _context.movement
+                                   var dataRep= await _context.movement
                                                           .Include(e => e.book.authors)
                                                           .Include(e => e.book.generous)
                                                           .AsNoTracking()
                                                           .ToListAsync();
-                                    var result = limit != 0 ? data.Where(e=>e.operation=="sale").Skip(page).Take(limit).ToList() : data.Where(e=>e.operation=="").ToList();
+                                    var data =_search=="null"? dataRep:dataRep.Where(e=>e.ContainValue(_search));
+                                    var dataSale=data.Where(e=>e.operation=="sale").ToList();                       
+                                    var result = limit != 0 ? dataSale.Skip(page).Take(limit).ToList() : dataSale.ToList();
+                                    return new ResponseView { data = result, total = dataSale.Count, page = page, limit = limit, totalPage = limit != 0 ? dataSale.Count / limit : 1 };
+
+                        }
+                        public async Task<ResponseView> Deposits(string _search=null,int page = 0, int limit = 0)
+                        {
+                                    var dataRep= await _context.movement
+                                                          .Include(e => e.book.authors)
+                                                          .Include(e => e.book.generous)
+                                                          .AsNoTracking()
+                                                          .ToListAsync();
+                                    var data =_search=="null"? dataRep:dataRep.Where(e=>e.ContainValue(_search));
+                                    var dataDeposits=data.Where(e=>e.operation=="deposit").ToList();                      
+                                    var result = limit != 0 ? dataDeposits.Skip(page).Take(limit).ToList() : dataDeposits.ToList();
+                                    return new ResponseView { data = result, total = dataDeposits.Count, page = page, limit = limit, totalPage = limit != 0 ? dataDeposits.Count / limit : 1 };
+
+                        }
+                        public async Task<ResponseView> Movements(string _search=null,int page = 0, int limit = 0)
+                        {
+                                    var dataRep= await _context.movement
+                                                          .Include(e => e.book.authors)
+                                                          .Include(e => e.book.generous)
+                                                          .AsNoTracking()
+                                                          .ToListAsync();
+                                    var data =_search=="null"? dataRep:dataRep.Where(e=>e.ContainValue(_search)).ToList();
+                                    var result = limit != 0 ? data.Skip(page).Take(limit).ToList() : data.ToList();
                                     return new ResponseView { data = result, total = data.Count, page = page, limit = limit, totalPage = limit != 0 ? data.Count / limit : 1 };
 
                         }
-                        public async Task<ResponseView> SearchSales(string search, int page = 0, int limit = 0)
-                        {
-                                    var data = await _context.movement
-                                                          .Include(e => e.book.authors)
-                                                          .Include(e => e.book.generous)
-                                                          .AsNoTracking()
-                                                          .ToListAsync();
-                                    var dataSearch = data.Where(e => e.ContainValue(search) && e.operation=="sale").ToList();
-                                    var result = limit != 0 ? dataSearch.Skip(page).Take(limit).ToList() : dataSearch.ToList();
-                                    return new ResponseView { data = result, total = dataSearch.Count, page = page, limit = limit, totalPage = limit != 0 ? dataSearch.Count / limit : 1 };
-                        }
-                        public async Task<ResponseView> Deposits(int page = 0, int limit = 0)
-                        {
-                                    var data = await _context.movement
-                                                          .Include(e => e.book.authors)
-                                                          .Include(e => e.book.generous)
-                                                          .AsNoTracking()
-                                                          .ToListAsync();
-                                    var result = limit != 0 ? data.Where(e=>e.operation=="deposit").Skip(page).Take(limit).ToList() : data.Where(e=>e.operation=="").ToList();
-                                    return new ResponseView { data = result, total = data.Count, page = page, limit = limit, totalPage = limit != 0 ? data.Count / limit : 1 };
-
-                        }
-                        public async Task<ResponseView> SearchDeposits(string search, int page = 0, int limit = 0)
-                        {
-                                    var data = await _context.movement
-                                                          .Include(e => e.book.authors)
-                                                          .Include(e => e.book.generous)
-                                                          .AsNoTracking()
-                                                          .ToListAsync();
-                                    var dataSearch = data.Where(e => e.ContainValue(search) && e.operation=="deposit").ToList();
-                                    var result = limit != 0 ? dataSearch.Skip(page).Take(limit).ToList() : dataSearch.ToList();
-                                    return new ResponseView { data = result, total = dataSearch.Count, page = page, limit = limit, totalPage = limit != 0 ? dataSearch.Count / limit : 1 };
-                        }
-
                         public async Task<Response> AddSale(Movement obj)
                         {
                                     var book = await _book.get(obj.bookId);

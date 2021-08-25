@@ -21,46 +21,26 @@ namespace BackEnd.Controllers
                            _logger = logger;
                         }
                         [HttpGet]
-                        [Route("/sales/{page}/{limit}")]
-                        [Authorize(Roles = "user")]
-                        public async Task<ResponseView> Sales(int page,int limit)
-                        {
-                            return await _movement.Sales(page,limit);
-                        }
-                        [HttpGet]
-                        [Route("/searchSales/{search}/{page}/{limit}")]
+                        [Route("/sales/{search}/{page}/{limit}")]
                         [Authorize(Roles = "user")]
                         public async Task<ResponseView> Sales(string search,int page,int limit)
                         {
-                            return await _movement.SearchSales(search,page,limit);
+                            return await _movement.Sales(search,page,limit);
+                        }
+
+                        [HttpGet]
+                        [Route("/deposits/{search}/{page}/{limit}")]
+                        [Authorize(Roles = "user")]
+                        public async Task<ResponseView> Deposits(string search, int page,int limit)
+                        {
+                            return await _movement.Deposits(search,page,limit);
                         }
                         [HttpGet]
-                        [Route("/deposits/{page}/{limit}")]
-                        [Authorize(Roles = "user")]
-                        public async Task<ResponseView> Deposits(int page,int limit)
-                        {
-                            return await _movement.Deposits(page,limit);
-                        }
-                        [HttpGet]
-                        [Route("/searchDeposits/{search}/{page}/{limit}")]
-                        [Authorize(Roles = "user")]
-                        public async Task<ResponseView> Deposits(string search,int page,int limit)
-                        {
-                            return await _movement.SearchDeposits(search,page,limit);
-                        }
-                                                [HttpGet]
-                        [Route("/movements/{page}/{limit}")]
-                        [Authorize(Roles = "user")]
-                        public async Task<ResponseView> Movements(int page,int limit)
-                        {
-                            return await _movement.get(page,limit);
-                        }
-                        [HttpGet]
-                        [Route("/searchMovements/{search}/{page}/{limit}")]
+                        [Route("/movements/{search}/{page}/{limit}")]
                         [Authorize(Roles = "user")]
                         public async Task<ResponseView> Movements(string search,int page,int limit)
                         {
-                            return await _movement.search(search,page,limit);
+                            return await _movement.Movements(search,page,limit);
                         }
                         [HttpPost]
                         [Route("/addSale")]
@@ -69,7 +49,6 @@ namespace BackEnd.Controllers
                         {
                            return await _movement.AddSale(obj);
                         }
-
                         [HttpDelete]
                         [Route("/deleteSale/{id}")]
                         [Authorize(Roles = "user")]

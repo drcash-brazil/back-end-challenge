@@ -86,6 +86,12 @@ namespace BackEnd.Repositories
                                     var result = limit != 0 ? dataSearch.Skip(page).Take(limit).ToList() : dataSearch.ToList();
                                     return new ResponseView { data = result, total = dataSearch.Count, page = page, limit = limit, totalPage = limit != 0 ? dataSearch.Count / limit : 1 };
                         }
+                         public async Task<List<T>> search(string search)
+                        {
+                                    var data = await get();
+                                    return data.Where(r => r.ContainValue(search)).ToList();
+                        }
+                        
 
             }
 }

@@ -29,19 +29,13 @@ namespace BackEnd.Controllers
                                     _logger = logger;
                         }
                         [HttpGet]
-                        [Route("/books/{page}/{limit}")]
-                        [Authorize(Roles = "user")]
-                        public async Task<ResponseView> Books(int page,int limit)
-                        {
-                            return await _book.Books(page,limit);
-                        }
-                        [HttpGet]
                         [Route("/books/{search}/{page}/{limit}")]
                         [Authorize(Roles = "user")]
                         public async Task<ResponseView> Books(string search,int page,int limit)
                         {
-                            return await _book.SearchBooks(search,page,limit);
+                            return await _book.Books(search,page,limit);
                         }
+                       
                         [HttpPost]
                         [Route("/addBook")]
                         [Authorize(Roles = "user")]
