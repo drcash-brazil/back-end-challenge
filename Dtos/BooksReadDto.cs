@@ -11,7 +11,7 @@ namespace back_end_challenge.Dtos
     // public int AutorId { get; set; }
     public Authors Authors { get; set; }
     // public int GeneroId { get; set; }
-    public Category Categories { get; set; }
+    public CategoryReadDto Categories { get; set; }
 
   }
 }

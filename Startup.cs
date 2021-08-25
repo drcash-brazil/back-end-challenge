@@ -42,9 +42,8 @@ namespace back_end_challenge
       // });
 
       services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-
-      services.AddScoped<IBookRepo, BooksRepo>();
       services.AddTransient<IUnitOfWork, UnitOfWork>();
+
 
       services.AddCors(o =>
       {
