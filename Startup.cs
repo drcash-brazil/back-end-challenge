@@ -36,11 +36,6 @@ namespace back_end_challenge
         Configuration.GetConnectionString("AppConnection"))
       );
 
-      // services.AddControllers().AddNewtonsoftJson(s =>
-      // {
-      //   s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-      // });
-
       services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
       services.AddScoped<IBookRepo, BooksRepo>();
