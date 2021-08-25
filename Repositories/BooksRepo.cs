@@ -20,19 +20,17 @@ namespace back_end_challenge.Repositories
                   .Include(e => e.Authors)
                   .Include(e => e.Categories)
                   .AsNoTracking()
+                  .OrderByDescending(x => x.Id)
                   .FirstOrDefault(x => x.Id == id);
     }
 
     public IEnumerable<Books> GetBooks()
     {
-      var result = _context.Books
+      return _context.Books
                   .Include(e => e.Authors)
                   .Include(e => e.Categories)
                   .AsNoTracking()
-                  .ToList();
-      return result;
-      // return _context.Books
-      // .OrderByDescending(x => x.Id).ToList();
+                  .OrderByDescending(x => x.Id).ToList();
     }
 
     public bool SavaChanges()
