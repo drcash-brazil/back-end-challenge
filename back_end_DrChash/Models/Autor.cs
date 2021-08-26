@@ -10,7 +10,7 @@ namespace back_end_DrChash.Models
     public class Autor
     {
         [Key]
-        public int AutorId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(100)]

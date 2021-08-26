@@ -47,7 +47,7 @@ namespace back_end_DrChash.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutLivro(int id, Livro livro)
         {
-            if (id != livro.LivroId)
+            if (id != livro.Id)
             {
                 return BadRequest();
             }
@@ -77,12 +77,12 @@ namespace back_end_DrChash.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Livro>> PostLivro([FromBody]Livro livro)
+        public async Task<ActionResult<Livro>> PostLivro(Livro livro)
         {
             _context.Livros.Add(livro);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetLivro", new { id = livro.LivroId }, livro);
+            return CreatedAtAction("GetLivro", new { id = livro.Id }, livro);
         }
 
         // DELETE: api/Livros/5
@@ -103,7 +103,7 @@ namespace back_end_DrChash.Controllers
 
         private bool LivroExists(int id)
         {
-            return _context.Livros.Any(e => e.LivroId == id);
+            return _context.Livros.Any(e => e.Id == id);
         }
     }
 }

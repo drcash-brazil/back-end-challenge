@@ -47,7 +47,7 @@ namespace back_end_DrChash.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAutor(int id, Autor autor)
         {
-            if (id != autor.AutorId)
+            if (id != autor.Id)
             {
                 return BadRequest();
             }
@@ -82,7 +82,7 @@ namespace back_end_DrChash.Controllers
             _context.Autor.Add(autor);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAutor", new { id = autor.AutorId }, autor);
+            return CreatedAtAction("GetAutor", new { id = autor.Id }, autor);
         }
 
         // DELETE: api/Autores/5
@@ -103,7 +103,7 @@ namespace back_end_DrChash.Controllers
 
         private bool AutorExists(int id)
         {
-            return _context.Autor.Any(e => e.AutorId == id);
+            return _context.Autor.Any(e => e.Id == id);
         }
     }
 }

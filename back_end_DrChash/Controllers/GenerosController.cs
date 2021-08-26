@@ -11,23 +11,23 @@ namespace back_end_DrChash.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GeneroesController : ControllerBase
+    public class GenerosController : ControllerBase
     {
         private readonly Contexto _context;
 
-        public GeneroesController(Contexto context)
+        public GenerosController(Contexto context)
         {
             _context = context;
         }
 
-        // GET: api/Generoes
+        // GET: api/Generos
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Genero>>> GetGenero()
         {
             return await _context.Genero.ToListAsync();
         }
 
-        // GET: api/Generoes/5
+        // GET: api/Generos/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Genero>> GetGenero(int id)
         {
@@ -41,13 +41,13 @@ namespace back_end_DrChash.Controllers
             return genero;
         }
 
-        // PUT: api/Generoes/5
+        // PUT: api/Generos/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutGenero(int id, Genero genero)
         {
-            if (id != genero.GeneroId)
+            if (id != genero.Id)
             {
                 return BadRequest();
             }
@@ -73,7 +73,7 @@ namespace back_end_DrChash.Controllers
             return NoContent();
         }
 
-        // POST: api/Generoes
+        // POST: api/Generos
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
@@ -82,10 +82,10 @@ namespace back_end_DrChash.Controllers
             _context.Genero.Add(genero);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetGenero", new { id = genero.GeneroId }, genero);
+            return CreatedAtAction("GetGenero", new { id = genero.Id }, genero);
         }
 
-        // DELETE: api/Generoes/5
+        // DELETE: api/Generos/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Genero>> DeleteGenero(int id)
         {
@@ -103,7 +103,7 @@ namespace back_end_DrChash.Controllers
 
         private bool GeneroExists(int id)
         {
-            return _context.Genero.Any(e => e.GeneroId == id);
+            return _context.Genero.Any(e => e.Id == id);
         }
     }
 }

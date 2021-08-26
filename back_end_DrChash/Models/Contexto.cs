@@ -11,7 +11,7 @@ namespace back_end_DrChash.Models
     {
         public Contexto(DbContextOptions<Contexto> opcoes) : base(opcoes)
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
         public DbSet<Livro> Livros { get; set; }

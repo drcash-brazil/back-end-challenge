@@ -9,9 +9,8 @@ namespace back_end_DrChash.Models
 {
     public class Livro
     {
-
         [Key]
-        public int LivroId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(50)]

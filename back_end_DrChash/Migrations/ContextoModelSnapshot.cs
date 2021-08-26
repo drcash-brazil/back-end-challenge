@@ -20,7 +20,7 @@ namespace back_end_DrChash.Migrations
 
             modelBuilder.Entity("back_end_DrChash.Models.Autor", b =>
                 {
-                    b.Property<int>("AutorId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -33,7 +33,7 @@ namespace back_end_DrChash.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("AutorId");
+                    b.HasKey("Id");
 
                     b.HasIndex("LivroId");
 
@@ -42,12 +42,12 @@ namespace back_end_DrChash.Migrations
 
             modelBuilder.Entity("back_end_DrChash.Models.Genero", b =>
                 {
-                    b.Property<int>("GeneroId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Definicao")
+                    b.Property<string>("Classificacao")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
@@ -55,7 +55,7 @@ namespace back_end_DrChash.Migrations
                     b.Property<int>("LivroId")
                         .HasColumnType("int");
 
-                    b.HasKey("GeneroId");
+                    b.HasKey("Id");
 
                     b.HasIndex("LivroId");
 
@@ -64,7 +64,7 @@ namespace back_end_DrChash.Migrations
 
             modelBuilder.Entity("back_end_DrChash.Models.Livro", b =>
                 {
-                    b.Property<int>("LivroId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -77,7 +77,7 @@ namespace back_end_DrChash.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("LivroId");
+                    b.HasKey("Id");
 
                     b.ToTable("Livros");
                 });

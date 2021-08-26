@@ -10,11 +10,11 @@ namespace back_end_DrChash.Models
     public class Genero
     {
         [Key]
-        public int GeneroId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(20)]
-        public string Definicao { get; set; }
+        public string Classificacao { get; set; }
 
         //Relacionamentos...
         public virtual Livro Livros { get; set; }

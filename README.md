@@ -34,7 +34,7 @@ Gabriel tem que ser capaz de adicionar novos gêneros e autores para usar no cad
 
 - Microsoft.EntityFrameworkCore: EF Core pode servir como um mapeado relacional de objeto (O/RM), que: Permite que os desenvolvedores do . NET trabalhem com um banco de dados usando objetos . NET.
 - Microsoft.EntityFramworkCore.SqlServer: Utilizado para realização da comunicação com o banco de dados SQL Server por meio de migrações.
-
+- Swashbuckle.AspNetCore.SwaggerUI: Swagger é uma linguagem de descrição de interface para descrever APIs RESTful expressas usando JSON. 
 
 ## Experiência com o projeto 
 	O desafio proporcionou uma interessante experiência com NET.Core até mesmo por ser meu segundo contato com o framework. A ideia de incluir mais de um autor e genero por livro, como por exemplo
