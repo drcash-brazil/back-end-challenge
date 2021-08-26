@@ -76,6 +76,7 @@ namespace back_end_challenge.Controllers
       if (!ModelState.IsValid) return BadRequest(ModelState);
 
       var author = await _unitOfWork.Authors.Get(q => q.Id == id);
+
       if (author is null) return NotFound($"Não foi encontrado um registo com ID {id}");
 
       _mapper.Map(authorDto, author);
