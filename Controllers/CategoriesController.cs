@@ -16,10 +16,10 @@ namespace back_end_challenge.Controllers
   public class CategoriesController : ControllerBase
   {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly ILogger<BooksController> _logger;
+    private readonly ILogger<CategoriesController> _logger;
     private readonly IMapper _mapper;
 
-    public CategoriesController(IUnitOfWork unitOfWork, ILogger<BooksController> logger, IMapper mapper)
+    public CategoriesController(IUnitOfWork unitOfWork, ILogger<CategoriesController> logger, IMapper mapper)
     {
       _unitOfWork = unitOfWork;
       _logger = logger;
@@ -88,7 +88,7 @@ namespace back_end_challenge.Controllers
       }
     }
 
-    //POST api/categories/
+    //PUT api/categories/
     [HttpPut("{id:int}")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -111,6 +111,32 @@ namespace back_end_challenge.Controllers
       catch (Exception ex)
       {
         _logger.LogError(ex, $"Ocorreu um erro em {nameof(UpdateCategory)}");
+        return StatusCode(500, "Ocorreu um erro interno no servidor. Por favor tente novamente mais tarde.");
+      }
+    }
+
+    //DELETE api/categories/
+    [HttpDelete("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> DeleteCategory(int id)
+    {
+      if (id < 1) return BadRequest();
+      try
+      {
+        var category = await _unitOfWork.Categories.Get(q => q.Id == id);
+        if (category is null) return NotFound($"Não foi encontrado um registo com ID {id}");
+
+        await _unitOfWork.Categories.Delete(id);
+        await _unitOfWork.ToSave();
+
+        return NoContent();
+      }
+      catch (Exception ex)
+      {
+        _logger.LogError(ex, $"Ocorreu um erro em {nameof(DeleteCategory)}");
         return StatusCode(500, "Ocorreu um erro interno no servidor. Por favor tente novamente mais tarde.");
       }
     }

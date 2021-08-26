@@ -88,7 +88,7 @@ namespace back_end_challenge.Controllers
       }
     }
 
-    //POST api/books/
+    //PUT api/books/
     [HttpPut("{id:int}")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -111,6 +111,33 @@ namespace back_end_challenge.Controllers
       catch (Exception ex)
       {
         _logger.LogError(ex, $"Ocorreu um erro em {nameof(UpdateBook)}");
+        return StatusCode(500, "Ocorreu um erro interno no servidor. Por favor tente novamente mais tarde.");
+      }
+    }
+
+
+    //DELETE api/books/
+    [HttpDelete("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> DeleteBook(int id)
+    {
+      if (id < 1) return BadRequest();
+      try
+      {
+        var book = await _unitOfWork.Books.Get(q => q.Id == id);
+        if (book is null) return NotFound($"Não foi encontrado um registo com ID {id}");
+
+        await _unitOfWork.Books.Delete(id);
+        await _unitOfWork.ToSave();
+
+        return NoContent();
+      }
+      catch (Exception ex)
+      {
+        _logger.LogError(ex, $"Ocorreu um erro em {nameof(DeleteBook)}");
         return StatusCode(500, "Ocorreu um erro interno no servidor. Por favor tente novamente mais tarde.");
       }
     }

@@ -11,11 +11,7 @@ namespace back_end_challenge.Dtos
     public string nome { get; set; }
   }
 
-  public class CategoryUpdateDto : CategoryCreateDto
-  {
-    public IList<BooksReadDto> Books { get; set; }
-
-  }
+  public class CategoryUpdateDto : CategoryCreateDto { }
 
   public class CategoryReadDto
   {
