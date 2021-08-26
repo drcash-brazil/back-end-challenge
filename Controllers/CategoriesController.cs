@@ -30,17 +30,9 @@ namespace back_end_challenge.Controllers
     [HttpGet]
     public async Task<IActionResult> GetAllCategories()
     {
-      try
-      {
-        var entities = await _unitOfWork.Categories.GetAll(includes: new List<string> { "Books" });
-        var result = _mapper.Map<IList<CategoryReadDto>>(entities);
-        return Ok(result);
-      }
-      catch (Exception ex)
-      {
-        _logger.LogError(ex, $"Ocorreu um erro em {nameof(GetAllCategories)}");
-        return StatusCode(500, "Ocorreu um erro interno no servidor. Por favor tente novamente mais tarde.");
-      }
+      var entities = await _unitOfWork.Categories.GetAll(includes: new List<string> { "Books" });
+      var result = _mapper.Map<IList<CategoryReadDto>>(entities);
+      return Ok(result);
     }
 
     //GET api/categories/{id}
@@ -48,17 +40,9 @@ namespace back_end_challenge.Controllers
 
     public async Task<IActionResult> GetCategoryById(int id)
     {
-      try
-      {
-        var entity = await _unitOfWork.Categories.Get(x => x.Id == id, new List<string> { "Books" });
-        var result = _mapper.Map<CategoryReadDto>(entity);
-        return Ok(result);
-      }
-      catch (Exception ex)
-      {
-        _logger.LogError(ex, $"Ocorreu um erro em {nameof(GetCategoryById)}");
-        return StatusCode(500, "Ocorreu um erro interno no servidor. Por favor tente novamente mais tarde.");
-      }
+      var entity = await _unitOfWork.Categories.Get(x => x.Id == id, new List<string> { "Books" });
+      var result = _mapper.Map<CategoryReadDto>(entity);
+      return Ok(result);
     }
 
     //POST api/categories/
@@ -68,24 +52,13 @@ namespace back_end_challenge.Controllers
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> CreateCategory([FromBody] CategoryCreateDto entityDto)
     {
-      if (!ModelState.IsValid)
-      {
-        _logger.LogError($"Ocorreu um erro em {nameof(GetCategoryById)}");
-        return BadRequest(ModelState);
-      }
-      try
-      {
-        var entity = _mapper.Map<Category>(entityDto);
-        await _unitOfWork.Categories.Insert(entity);
-        await _unitOfWork.ToSave();
+      if (!ModelState.IsValid) return BadRequest(ModelState);
 
-        return CreatedAtRoute(nameof(GetCategoryById), new { Id = entity.Id }, entity);
-      }
-      catch (Exception ex)
-      {
-        _logger.LogError(ex, $"Ocorreu um erro em {nameof(CreateCategory)}");
-        return StatusCode(500, "Ocorreu um erro interno no servidor. Por favor tente novamente mais tarde.");
-      }
+      var entity = _mapper.Map<Category>(entityDto);
+      await _unitOfWork.Categories.Insert(entity);
+      await _unitOfWork.ToSave();
+
+      return CreatedAtRoute(nameof(GetCategoryById), new { Id = entity.Id }, entity);
     }
 
     //PUT api/categories/
@@ -97,22 +70,15 @@ namespace back_end_challenge.Controllers
     public async Task<IActionResult> UpdateCategory(int id, [FromBody] CategoryUpdateDto categoryDto)
     {
       if (!ModelState.IsValid) return BadRequest(ModelState);
-      try
-      {
-        var category = await _unitOfWork.Categories.Get(q => q.Id == id);
-        if (category is null) return NotFound($"Não foi encontrado um registo com ID {id}");
 
-        _mapper.Map(categoryDto, category);
-        _unitOfWork.Categories.Update(category);
-        await _unitOfWork.ToSave();
+      var category = await _unitOfWork.Categories.Get(q => q.Id == id);
+      if (category is null) return NotFound($"Não foi encontrado um registo com ID {id}");
 
-        return NoContent();
-      }
-      catch (Exception ex)
-      {
-        _logger.LogError(ex, $"Ocorreu um erro em {nameof(UpdateCategory)}");
-        return StatusCode(500, "Ocorreu um erro interno no servidor. Por favor tente novamente mais tarde.");
-      }
+      _mapper.Map(categoryDto, category);
+      _unitOfWork.Categories.Update(category);
+      await _unitOfWork.ToSave();
+
+      return NoContent();
     }
 
     //DELETE api/categories/
@@ -124,21 +90,14 @@ namespace back_end_challenge.Controllers
     public async Task<IActionResult> DeleteCategory(int id)
     {
       if (id < 1) return BadRequest();
-      try
-      {
-        var category = await _unitOfWork.Categories.Get(q => q.Id == id);
-        if (category is null) return NotFound($"Não foi encontrado um registo com ID {id}");
 
-        await _unitOfWork.Categories.Delete(id);
-        await _unitOfWork.ToSave();
+      var category = await _unitOfWork.Categories.Get(q => q.Id == id);
+      if (category is null) return NotFound($"Não foi encontrado um registo com ID {id}");
 
-        return NoContent();
-      }
-      catch (Exception ex)
-      {
-        _logger.LogError(ex, $"Ocorreu um erro em {nameof(DeleteCategory)}");
-        return StatusCode(500, "Ocorreu um erro interno no servidor. Por favor tente novamente mais tarde.");
-      }
+      await _unitOfWork.Categories.Delete(id);
+      await _unitOfWork.ToSave();
+
+      return NoContent();
     }
 
   }

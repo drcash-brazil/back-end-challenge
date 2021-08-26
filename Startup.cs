@@ -35,11 +35,7 @@ namespace back_end_challenge
       services.AddDbContext<DataContext>(opt => opt.UseSqlServer(
         Configuration.GetConnectionString("AppConnection"))
       );
-
-      // services.AddControllers().AddNewtonsoftJson(s =>
-      // {
-      //   s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-      // });
+      services.ConfigureIdentity();
 
       services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
       services.AddTransient<IUnitOfWork, UnitOfWork>();
@@ -68,6 +64,8 @@ namespace back_end_challenge
       }
 
       app.UseCors("AllowAll");
+
+      app.ConfigureExceptionHandler();
 
       app.UseHttpsRedirection();
 
