@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using back_end_challenge.Dtos;
 using back_end_challenge.IRepository;
+using back_end_challenge.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -42,8 +43,9 @@ namespace back_end_challenge.Controllers
     }
 
     //GET api/categories/{id}
-    [HttpGet("{id:int}")]
-    public async Task<IActionResult> GetCategory(int id)
+    [HttpGet("{id:int}", Name = "GetCategoryById")]
+
+    public async Task<IActionResult> GetCategoryById(int id)
     {
       try
       {
@@ -53,9 +55,34 @@ namespace back_end_challenge.Controllers
       }
       catch (Exception ex)
       {
-        _logger.LogError(ex, $"Ocorreu um erro em {nameof(GetCategory)}");
+        _logger.LogError(ex, $"Ocorreu um erro em {nameof(GetCategoryById)}");
         return StatusCode(500, "Ocorreu um erro interno no servidor. Por favor tente novamente mais tarde.");
       }
     }
+
+    //POST api/categories/
+    [HttpPost]
+    public async Task<IActionResult> CreateCategory([FromBody] CategoryDTO entityDto)
+    {
+      if (!ModelState.IsValid)
+      {
+        _logger.LogError($"Ocorreu um erro em {nameof(GetCategoryById)}");
+        return BadRequest(ModelState);
+      }
+      try
+      {
+        var entity = _mapper.Map<Category>(entityDto);
+        await _unitOfWork.Categories.Insert(entity);
+        await _unitOfWork.ToSave();
+
+        return CreatedAtRoute(nameof(GetCategoryById), new { Id = entity.Id }, entity);
+      }
+      catch (Exception ex)
+      {
+        _logger.LogError(ex, $"Ocorreu um erro em {nameof(CreateCategory)}");
+        return StatusCode(500, "Ocorreu um erro interno no servidor. Por favor tente novamente mais tarde.");
+      }
+    }
+
   }
 }

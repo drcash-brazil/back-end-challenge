@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using back_end_challenge.Dtos;
 using back_end_challenge.IRepository;
+using back_end_challenge.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -42,8 +43,8 @@ namespace back_end_challenge.Controllers
     }
 
     //GET api/authors/{id}
-    [HttpGet("{id:int}")]
-    public async Task<IActionResult> GetAuthor(int id)
+    [HttpGet("{id:int}", Name = "GetAuthorById")]
+    public async Task<IActionResult> GetAuthorById(int id)
     {
       try
       {
@@ -53,9 +54,35 @@ namespace back_end_challenge.Controllers
       }
       catch (Exception ex)
       {
-        _logger.LogError(ex, $"Ocorreu um erro em {nameof(GetAuthor)}");
+        _logger.LogError(ex, $"Ocorreu um erro em {nameof(GetAuthorById)}");
         return StatusCode(500, "Ocorreu um erro interno no servidor. Por favor tente novamente mais tarde.");
       }
     }
+
+
+    //POST api/authors/
+    [HttpPost]
+    public async Task<IActionResult> CreateAuthor([FromBody] AuthorDto entityDto)
+    {
+      if (!ModelState.IsValid)
+      {
+        _logger.LogError($"Ocorreu um erro em {nameof(GetAuthorById)}");
+        return BadRequest(ModelState);
+      }
+      try
+      {
+        var entity = _mapper.Map<Authors>(entityDto);
+        await _unitOfWork.Authors.Insert(entity);
+        await _unitOfWork.ToSave();
+
+        return CreatedAtRoute(nameof(GetAuthorById), new { Id = entity.Id }, entity);
+      }
+      catch (Exception ex)
+      {
+        _logger.LogError(ex, $"Ocorreu um erro em {nameof(CreateAuthor)}");
+        return StatusCode(500, "Ocorreu um erro interno no servidor. Por favor tente novamente mais tarde.");
+      }
+    }
+
   }
 }

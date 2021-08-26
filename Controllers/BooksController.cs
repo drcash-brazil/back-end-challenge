@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using back_end_challenge.Dtos;
 using back_end_challenge.IRepository;
+using back_end_challenge.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -42,8 +43,8 @@ namespace back_end_challenge.Controllers
     }
 
     //GET api/books/{id}
-    [HttpGet("{id:int}")]
-    public async Task<IActionResult> GetBook(int id)
+    [HttpGet("{id:int}", Name = "GetBookById")]
+    public async Task<IActionResult> GetBookById(int id)
     {
       try
       {
@@ -53,9 +54,38 @@ namespace back_end_challenge.Controllers
       }
       catch (Exception ex)
       {
-        _logger.LogError(ex, $"Ocorreu um erro em {nameof(GetBook)}");
+        _logger.LogError(ex, $"Ocorreu um erro em {nameof(GetBookById)}");
         return StatusCode(500, "Ocorreu um erro interno no servidor. Por favor tente novamente mais tarde.");
       }
     }
+
+
+    //POST api/books/
+    [HttpPost]
+    public async Task<IActionResult> CreateBook([FromBody] BooksDto bookDto)
+    {
+      if (!ModelState.IsValid)
+      {
+        _logger.LogError($"Ocorreu um erro em {nameof(CreateBook)}");
+        return BadRequest(ModelState);
+      }
+      try
+      {
+        var entity = _mapper.Map<Books>(bookDto);
+        await _unitOfWork.Books.Insert(entity);
+        await _unitOfWork.ToSave();
+
+        // var result = _mapper.Map<BooksReadDto>(entity);
+        return CreatedAtRoute(nameof(GetBookById), new { Id = entity.Id }, entity);
+        // var result = _mapper.Map<BooksReadDto>(entity);
+        // return CreatedAtRoute(nameof(GetBookById), new { Id = entity.Id }, entity);
+      }
+      catch (Exception ex)
+      {
+        _logger.LogError(ex, $"Ocorreu um erro em {nameof(CreateBook)}");
+        return StatusCode(500, "Ocorreu um erro interno no servidor. Por favor tente novamente mais tarde.");
+      }
+    }
+
   }
 }
