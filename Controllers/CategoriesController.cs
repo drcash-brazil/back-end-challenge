@@ -99,11 +99,11 @@ namespace back_end_challenge.Controllers
       if (!ModelState.IsValid) return BadRequest(ModelState);
       try
       {
-        var category = await _unitOfWork.Books.Get(q => q.Id == id);
+        var category = await _unitOfWork.Categories.Get(q => q.Id == id);
         if (category is null) return NotFound($"Não foi encontrado um registo com ID {id}");
 
         _mapper.Map(categoryDto, category);
-        _unitOfWork.Books.Update(category);
+        _unitOfWork.Categories.Update(category);
         await _unitOfWork.ToSave();
 
         return NoContent();

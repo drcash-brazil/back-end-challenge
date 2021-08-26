@@ -11,7 +11,12 @@ namespace back_end_challenge.Dtos
     public string nome { get; set; }
   }
 
-  public class AuthorUpdateDto : AuthorCreateDto { }
+  public class AuthorUpdateDto : AuthorCreateDto
+  {
+    public IList<BooksReadDto> Books { get; set; }
+
+  }
+
   public class AuthorReadDto
   {
     public int Id { get; set; }
