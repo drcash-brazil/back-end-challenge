@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace back_end_challenge.Dtos
 {
-  public class BooksDto
+  public class BookCreateDto
   {
 
     [Required]
@@ -19,4 +19,16 @@ namespace back_end_challenge.Dtos
     [Required]
     public int CategoryId { get; set; }
   }
+
+  public class BookUpdateDto : BookCreateDto { }
+
+  public class BooksReadDto
+  {
+    public int Id { get; set; }
+    public string Titulo { get; set; }
+    public int NumCopias { get; set; }
+    public AuthorReadDto Authors { get; set; }
+    public CategoryReadDto Categories { get; set; }
+  }
+
 }

@@ -5,6 +5,7 @@ using AutoMapper;
 using back_end_challenge.Dtos;
 using back_end_challenge.IRepository;
 using back_end_challenge.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -62,7 +63,10 @@ namespace back_end_challenge.Controllers
 
     //POST api/categories/
     [HttpPost]
-    public async Task<IActionResult> CreateCategory([FromBody] CategoryDTO entityDto)
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> CreateCategory([FromBody] CategoryCreateDto entityDto)
     {
       if (!ModelState.IsValid)
       {
@@ -80,6 +84,33 @@ namespace back_end_challenge.Controllers
       catch (Exception ex)
       {
         _logger.LogError(ex, $"Ocorreu um erro em {nameof(CreateCategory)}");
+        return StatusCode(500, "Ocorreu um erro interno no servidor. Por favor tente novamente mais tarde.");
+      }
+    }
+
+    //POST api/categories/
+    [HttpPut("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> UpdateCategory(int id, [FromBody] CategoryUpdateDto categoryDto)
+    {
+      if (!ModelState.IsValid) return BadRequest(ModelState);
+      try
+      {
+        var category = await _unitOfWork.Books.Get(q => q.Id == id);
+        if (category is null) return NotFound($"Não foi encontrado um registo com ID {id}");
+
+        _mapper.Map(categoryDto, category);
+        _unitOfWork.Books.Update(category);
+        await _unitOfWork.ToSave();
+
+        return NoContent();
+      }
+      catch (Exception ex)
+      {
+        _logger.LogError(ex, $"Ocorreu um erro em {nameof(UpdateCategory)}");
         return StatusCode(500, "Ocorreu um erro interno no servidor. Por favor tente novamente mais tarde.");
       }
     }

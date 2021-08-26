@@ -5,6 +5,7 @@ using AutoMapper;
 using back_end_challenge.Dtos;
 using back_end_challenge.IRepository;
 using back_end_challenge.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -62,7 +63,10 @@ namespace back_end_challenge.Controllers
 
     //POST api/books/
     [HttpPost]
-    public async Task<IActionResult> CreateBook([FromBody] BooksDto bookDto)
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> CreateBook([FromBody] BookCreateDto bookDto)
     {
       if (!ModelState.IsValid)
       {
@@ -75,14 +79,38 @@ namespace back_end_challenge.Controllers
         await _unitOfWork.Books.Insert(entity);
         await _unitOfWork.ToSave();
 
-        // var result = _mapper.Map<BooksReadDto>(entity);
         return CreatedAtRoute(nameof(GetBookById), new { Id = entity.Id }, entity);
-        // var result = _mapper.Map<BooksReadDto>(entity);
-        // return CreatedAtRoute(nameof(GetBookById), new { Id = entity.Id }, entity);
       }
       catch (Exception ex)
       {
         _logger.LogError(ex, $"Ocorreu um erro em {nameof(CreateBook)}");
+        return StatusCode(500, "Ocorreu um erro interno no servidor. Por favor tente novamente mais tarde.");
+      }
+    }
+
+    //POST api/books/
+    [HttpPut("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> UpdateBook(int id, [FromBody] BookUpdateDto bookDto)
+    {
+      if (!ModelState.IsValid) return BadRequest(ModelState);
+      try
+      {
+        var book = await _unitOfWork.Books.Get(q => q.Id == id);
+        if (book is null) return NotFound($"Não foi encontrado um registo com ID {id}");
+
+        _mapper.Map(bookDto, book);
+        _unitOfWork.Books.Update(book);
+        await _unitOfWork.ToSave();
+
+        return NoContent();
+      }
+      catch (Exception ex)
+      {
+        _logger.LogError(ex, $"Ocorreu um erro em {nameof(UpdateBook)}");
         return StatusCode(500, "Ocorreu um erro interno no servidor. Por favor tente novamente mais tarde.");
       }
     }
