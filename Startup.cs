@@ -33,7 +33,7 @@ namespace back_end_challenge
     {
 
       services.AddDbContext<DataContext>(opt => opt.UseSqlServer(
-        Configuration.GetConnectionString("AppConnection"))
+        Configuration.GetConnectionString("DBConnection"))
       );
 
       services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);

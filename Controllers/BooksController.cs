@@ -27,6 +27,7 @@ namespace back_end_challenge.Controllers
       _mapper = mapper;
     }
 
+
     //GET api/books/
     [HttpGet]
     public async Task<IActionResult> GetAllBooks([FromQuery] RequestParams requestParams)
@@ -40,6 +41,7 @@ namespace back_end_challenge.Controllers
       var result = _mapper.Map<IList<BooksReadDto>>(entities);
       return Ok(result);
     }
+
 
     //GET api/books/{id}
     [HttpGet("{id:int}", Name = "GetBookById")]
@@ -66,6 +68,7 @@ namespace back_end_challenge.Controllers
 
       return CreatedAtRoute(nameof(GetBookById), new { Id = entity.Id }, entity);
     }
+
 
     //PUT api/books/
     [HttpPut("{id:int}")]

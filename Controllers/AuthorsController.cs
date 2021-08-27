@@ -20,6 +20,7 @@ namespace back_end_challenge.Controllers
     private readonly ILogger<AuthorsController> _logger;
     private readonly IMapper _mapper;
 
+
     public AuthorsController(IUnitOfWork unitOfWork, ILogger<AuthorsController> logger, IMapper mapper)
     {
       _unitOfWork = unitOfWork;
@@ -27,13 +28,13 @@ namespace back_end_challenge.Controllers
       _mapper = mapper;
     }
 
+
     //GET api/authors/
     [HttpGet]
     public async Task<IActionResult> GetAllAuthors([FromQuery] RequestParams requestParams)
     {
       var entities = await _unitOfWork.Authors.GetAll(
         requestParams: requestParams,
-        includes: new List<string> { "Books" },
         orderBy: q => q.OrderByDescending(x => x.Id)
       );
 
@@ -41,11 +42,37 @@ namespace back_end_challenge.Controllers
       return Ok(result);
     }
 
+
     //GET api/authors/{id}
     [HttpGet("{id:int}", Name = "GetAuthorById")]
     public async Task<IActionResult> GetAuthorById(int id)
     {
-      var entity = await _unitOfWork.Authors.Get(x => x.Id == id, new List<string> { "Books" });
+      var entity = await _unitOfWork.Authors.Get(x => x.Id == id);
+      var result = _mapper.Map<AuthorReadDto>(entity);
+      return Ok(result);
+    }
+
+
+    //GET api/authors/{search}
+    [HttpGet("{name}")]
+    public async Task<IActionResult> GetAuthorByName(string name, [FromQuery] RequestParams requestParams)
+    {
+      var entities = await _unitOfWork.Authors.GetAll(
+        requestParams: requestParams,
+        expression: (x => x.nome.Contains(name)),
+        orderBy: q => q.OrderByDescending(x => x.Id)
+      );
+
+      var result = _mapper.Map<IList<AuthorReadDto>>(entities);
+      return Ok(result);
+    }
+
+
+    //GET api/authors/{id}/books
+    [HttpGet("{id:int}/books")]
+    public async Task<IActionResult> GetAuthorWithBooks(int id)
+    {
+      var entity = await _unitOfWork.Authors.Get(x => x.Id == id, new List<string> { "Books", "Books.Categories" });
       var result = _mapper.Map<AuthorReadDto>(entity);
       return Ok(result);
     }
@@ -70,6 +97,7 @@ namespace back_end_challenge.Controllers
 
       return CreatedAtRoute(nameof(GetAuthorById), new { Id = entity.Id }, entity);
     }
+
 
     //POST api/authors/
     [HttpPut("{id:int}")]
