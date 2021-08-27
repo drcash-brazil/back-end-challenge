@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using back_end_challenge.Dtos;
@@ -28,9 +29,14 @@ namespace back_end_challenge.Controllers
 
     //GET api/authors/
     [HttpGet]
-    public async Task<IActionResult> GetAllAuthors()
+    public async Task<IActionResult> GetAllAuthors([FromQuery] RequestParams requestParams)
     {
-      var entities = await _unitOfWork.Authors.GetAll(includes: new List<string> { "Books" });
+      var entities = await _unitOfWork.Authors.GetAll(
+        requestParams: requestParams,
+        includes: new List<string> { "Books" },
+        orderBy: q => q.OrderByDescending(x => x.Id)
+      );
+
       var result = _mapper.Map<IList<AuthorReadDto>>(entities);
       return Ok(result);
     }
