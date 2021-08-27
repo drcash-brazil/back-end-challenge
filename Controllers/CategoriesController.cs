@@ -33,7 +33,6 @@ namespace back_end_challenge.Controllers
     {
       var entities = await _unitOfWork.Categories.GetAll(
           requestParams: requestParams,
-          includes: new List<string> { "Books" },
           orderBy: q => q.OrderByDescending(x => x.Id)
       );
 
@@ -50,6 +49,31 @@ namespace back_end_challenge.Controllers
       var result = _mapper.Map<CategoryReadDto>(entity);
       return Ok(result);
     }
+
+    //GET api/categories/{name}
+    [HttpGet("{name}")]
+    public async Task<IActionResult> GetCategoryByName(string name, [FromQuery] RequestParams requestParams)
+    {
+      var entities = await _unitOfWork.Categories.GetAll(
+        requestParams: requestParams,
+        expression: (x => x.nome.Contains(name)),
+        orderBy: q => q.OrderByDescending(x => x.Id)
+      );
+
+      var result = _mapper.Map<IList<CategoryReadDto>>(entities);
+      return Ok(result);
+    }
+
+
+    //GET api/categories/{id}/books
+    [HttpGet("{id:int}/books")]
+    public async Task<IActionResult> GetCategoryWithBooks(int id)
+    {
+      var entity = await _unitOfWork.Categories.Get(x => x.Id == id, new List<string> { "Books", "Books.Authors" });
+      var result = _mapper.Map<CategoryReadDto>(entity);
+      return Ok(result);
+    }
+
 
     //POST api/categories/
     [HttpPost]

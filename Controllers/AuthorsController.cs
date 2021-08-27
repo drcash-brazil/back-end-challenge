@@ -33,7 +33,6 @@ namespace back_end_challenge.Controllers
     {
       var entities = await _unitOfWork.Authors.GetAll(
         requestParams: requestParams,
-        includes: new List<string> { "Books" },
         orderBy: q => q.OrderByDescending(x => x.Id)
       );
 
@@ -45,7 +44,31 @@ namespace back_end_challenge.Controllers
     [HttpGet("{id:int}", Name = "GetAuthorById")]
     public async Task<IActionResult> GetAuthorById(int id)
     {
-      var entity = await _unitOfWork.Authors.Get(x => x.Id == id, new List<string> { "Books" });
+      var entity = await _unitOfWork.Authors.Get(x => x.Id == id);
+      var result = _mapper.Map<AuthorReadDto>(entity);
+      return Ok(result);
+    }
+
+
+    //GET api/authors/{search}
+    [HttpGet("{name}")]
+    public async Task<IActionResult> GetAuthorByName(string name, [FromQuery] RequestParams requestParams)
+    {
+      var entities = await _unitOfWork.Authors.GetAll(
+        requestParams: requestParams,
+        expression: (x => x.nome.Contains(name)),
+        orderBy: q => q.OrderByDescending(x => x.Id)
+      );
+
+      var result = _mapper.Map<IList<AuthorReadDto>>(entities);
+      return Ok(result);
+    }
+
+    //GET api/authors/{id}/books
+    [HttpGet("{id:int}/books")]
+    public async Task<IActionResult> GetAuthorWithBooks(int id)
+    {
+      var entity = await _unitOfWork.Authors.Get(x => x.Id == id, new List<string> { "Books", "Books.Categories" });
       var result = _mapper.Map<AuthorReadDto>(entity);
       return Ok(result);
     }
