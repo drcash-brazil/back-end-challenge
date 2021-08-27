@@ -35,14 +35,9 @@ namespace back_end_challenge
       services.AddDbContext<DataContext>(opt => opt.UseSqlServer(
         Configuration.GetConnectionString("AppConnection"))
       );
-<<<<<<< HEAD
-=======
-      services.ConfigureIdentity();
->>>>>>> devtest
 
       services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
       services.AddTransient<IUnitOfWork, UnitOfWork>();
-
 
       services.AddCors(o =>
       {
