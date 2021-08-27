@@ -36,6 +36,9 @@ namespace back_end_challenge
         Configuration.GetConnectionString("DBConnection"))
       );
 
+      services.AddAuthentication();
+      services.ConfigureIdentity();
+
       services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
       services.AddTransient<IUnitOfWork, UnitOfWork>();
 

@@ -2,6 +2,7 @@ using back_end_challenge.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 
@@ -11,7 +12,10 @@ namespace back_end_challenge
   {
     public static void ConfigureIdentity(this IServiceCollection services)
     {
+      var builder = services.AddIdentityCore<Users>(q => q.User.RequireUniqueEmail = true);
 
+      builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), services);
+      builder.AddEntityFrameworkStores<DataContext>().AddDefaultTokenProviders();
     }
 
     //GLOBAL ERROR HANDLER
