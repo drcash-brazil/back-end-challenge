@@ -100,6 +100,28 @@ namespace back_end_challenge.Controllers
 
 
     //POST api/authors/
+    [HttpPost("range")]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> CreateRangeAuthor([FromBody] IEnumerable<AuthorCreateDto> entityDto)
+    {
+      if (!ModelState.IsValid)
+      {
+        _logger.LogError($"Ocorreu um erro em {nameof(CreateRangeAuthor)}");
+        return BadRequest(ModelState);
+      }
+
+      var entity = _mapper.Map<IEnumerable<Authors>>(entityDto);
+      await _unitOfWork.Authors.InsertRange(entity);
+      await _unitOfWork.ToSave();
+
+      var result = _mapper.Map<IList<AuthorReadDto>>(entity);
+      return Ok(result);
+    }
+
+
+    //POST api/authors/
     [HttpPut("{id:int}")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]

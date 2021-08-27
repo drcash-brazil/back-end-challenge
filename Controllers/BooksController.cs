@@ -53,6 +53,22 @@ namespace back_end_challenge.Controllers
     }
 
 
+    //GET api/authors/{name}
+    [HttpGet("{name}")]
+    public async Task<IActionResult> GetBookByName(string name, [FromQuery] RequestParams requestParams)
+    {
+      var entities = await _unitOfWork.Books.GetAll(
+        requestParams: requestParams,
+        expression: (x => x.Titulo.Contains(name)),
+        includes: (new List<string> { "Authors", "Categories" }),
+        orderBy: q => q.OrderByDescending(x => x.Id)
+      );
+
+      var result = _mapper.Map<IList<BooksReadDto>>(entities);
+      return Ok(result);
+    }
+
+
     //POST api/books/
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -67,6 +83,28 @@ namespace back_end_challenge.Controllers
       await _unitOfWork.ToSave();
 
       return CreatedAtRoute(nameof(GetBookById), new { Id = entity.Id }, entity);
+    }
+
+
+    //POST api/categories/
+    [HttpPost("range")]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> CreateRangeBooks([FromBody] IEnumerable<BookCreateDto> entityDto)
+    {
+      if (!ModelState.IsValid)
+      {
+        _logger.LogError($"Ocorreu um erro em {nameof(CreateRangeBooks)}");
+        return BadRequest(ModelState);
+      }
+
+      var entity = _mapper.Map<IEnumerable<Books>>(entityDto);
+      await _unitOfWork.Books.InsertRange(entity);
+      await _unitOfWork.ToSave();
+
+      var result = _mapper.Map<IList<BookCreateDto>>(entity);
+      return Ok(result);
     }
 
 

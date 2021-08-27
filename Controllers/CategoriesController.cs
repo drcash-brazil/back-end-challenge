@@ -93,6 +93,27 @@ namespace back_end_challenge.Controllers
       return CreatedAtRoute(nameof(GetCategoryById), new { Id = entity.Id }, entity);
     }
 
+    //POST api/categories/
+    [HttpPost("range")]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> CreateRangeCategory([FromBody] IEnumerable<CategoryCreateDto> entityDto)
+    {
+      if (!ModelState.IsValid)
+      {
+        _logger.LogError($"Ocorreu um erro em {nameof(CreateRangeCategory)}");
+        return BadRequest(ModelState);
+      }
+
+      var entity = _mapper.Map<IEnumerable<Category>>(entityDto);
+      await _unitOfWork.Categories.InsertRange(entity);
+      await _unitOfWork.ToSave();
+
+      var result = _mapper.Map<IList<CategoryCreateDto>>(entity);
+      return Ok(result);
+    }
+
 
     //PUT api/categories/
     [HttpPut("{id:int}")]
