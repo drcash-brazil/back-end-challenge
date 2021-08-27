@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using back_end_challenge.IRepository;
 using back_end_challenge.Models;
 using Microsoft.EntityFrameworkCore;
+using X.PagedList;
+
 
 namespace back_end_challenge.Repositories
 {
@@ -62,6 +64,26 @@ namespace back_end_challenge.Repositories
       if (orderBy != null) query = orderBy(query);
 
       return await query.AsNoTracking().ToListAsync();
+    }
+
+    public async Task<IPagedList<T>> GetAll(RequestParams requestParams, Expression<Func<T, bool>> expression = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, List<string> includes = null)
+    {
+      IQueryable<T> query = _db;
+
+      if (expression != null) query = query.Where(expression);
+
+      if (includes != null)
+      {
+        foreach (var includeProperty in includes)
+        {
+          query = query.Include(includeProperty);
+        }
+      }
+
+      if (orderBy != null) query = orderBy(query);
+
+      return await query.AsNoTracking().
+            ToPagedListAsync(requestParams.PageNumber, requestParams.PageSize);
     }
 
     public async Task Insert(T entity)

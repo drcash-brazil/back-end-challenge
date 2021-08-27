@@ -35,11 +35,14 @@ namespace back_end_challenge
       services.AddDbContext<DataContext>(opt => opt.UseSqlServer(
         Configuration.GetConnectionString("AppConnection"))
       );
+<<<<<<< HEAD
+=======
+      services.ConfigureIdentity();
+>>>>>>> devtest
 
       services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-
-      services.AddScoped<IBookRepo, BooksRepo>();
       services.AddTransient<IUnitOfWork, UnitOfWork>();
+
 
       services.AddCors(o =>
       {
@@ -64,6 +67,8 @@ namespace back_end_challenge
       }
 
       app.UseCors("AllowAll");
+
+      app.ConfigureExceptionHandler();
 
       app.UseHttpsRedirection();
 

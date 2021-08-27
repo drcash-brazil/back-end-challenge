@@ -12,96 +12,95 @@ using Microsoft.Extensions.Logging;
 
 namespace back_end_challenge.Controllers
 {
-  [Route("api/books")]
+  [Route("api/categories")]
   [ApiController]
-  public class BooksController : ControllerBase
+  public class CategoriesController : ControllerBase
   {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly ILogger<BooksController> _logger;
+    private readonly ILogger<CategoriesController> _logger;
     private readonly IMapper _mapper;
 
-    public BooksController(IUnitOfWork unitOfWork, ILogger<BooksController> logger, IMapper mapper)
+    public CategoriesController(IUnitOfWork unitOfWork, ILogger<CategoriesController> logger, IMapper mapper)
     {
       _unitOfWork = unitOfWork;
       _logger = logger;
       _mapper = mapper;
     }
 
-    //GET api/books/
+    //GET api/categories/
     [HttpGet]
-    public async Task<IActionResult> GetAllBooks([FromQuery] RequestParams requestParams)
+    public async Task<IActionResult> GetAllCategories([FromQuery] RequestParams requestParams)
     {
-      var entities = await _unitOfWork.Books.GetAll(
+      var entities = await _unitOfWork.Categories.GetAll(
           requestParams: requestParams,
-          includes: new List<string> { "Authors", "Categories" },
+          includes: new List<string> { "Books" },
           orderBy: q => q.OrderByDescending(x => x.Id)
-        );
+      );
 
-      var result = _mapper.Map<IList<BooksReadDto>>(entities);
+      var result = _mapper.Map<IList<CategoryReadDto>>(entities);
       return Ok(result);
     }
 
-    //GET api/books/{id}
-    [HttpGet("{id:int}", Name = "GetBookById")]
-    public async Task<IActionResult> GetBookById(int id)
+    //GET api/categories/{id}
+    [HttpGet("{id:int}", Name = "GetCategoryById")]
+
+    public async Task<IActionResult> GetCategoryById(int id)
     {
-      var entity = await _unitOfWork.Books.Get(x => x.Id == id, new List<string> { "Authors", "Categories" });
-      var result = _mapper.Map<BooksReadDto>(entity);
+      var entity = await _unitOfWork.Categories.Get(x => x.Id == id, new List<string> { "Books" });
+      var result = _mapper.Map<CategoryReadDto>(entity);
       return Ok(result);
     }
 
-
-    //POST api/books/
+    //POST api/categories/
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> CreateBook([FromBody] BookCreateDto bookDto)
+    public async Task<IActionResult> CreateCategory([FromBody] CategoryCreateDto entityDto)
     {
       if (!ModelState.IsValid) return BadRequest(ModelState);
 
-      var entity = _mapper.Map<Books>(bookDto);
-      await _unitOfWork.Books.Insert(entity);
+      var entity = _mapper.Map<Category>(entityDto);
+      await _unitOfWork.Categories.Insert(entity);
       await _unitOfWork.ToSave();
 
-      return CreatedAtRoute(nameof(GetBookById), new { Id = entity.Id }, entity);
+      return CreatedAtRoute(nameof(GetCategoryById), new { Id = entity.Id }, entity);
     }
 
-    //PUT api/books/
+    //PUT api/categories/
     [HttpPut("{id:int}")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> UpdateBook(int id, [FromBody] BookUpdateDto bookDto)
+    public async Task<IActionResult> UpdateCategory(int id, [FromBody] CategoryUpdateDto categoryDto)
     {
       if (!ModelState.IsValid) return BadRequest(ModelState);
-      var book = await _unitOfWork.Books.Get(q => q.Id == id);
-      if (book is null) return NotFound($"Não foi encontrado um registo com ID {id}");
 
-      _mapper.Map(bookDto, book);
-      _unitOfWork.Books.Update(book);
+      var category = await _unitOfWork.Categories.Get(q => q.Id == id);
+      if (category is null) return NotFound($"Não foi encontrado um registo com ID {id}");
+
+      _mapper.Map(categoryDto, category);
+      _unitOfWork.Categories.Update(category);
       await _unitOfWork.ToSave();
 
       return NoContent();
     }
 
-
-    //DELETE api/books/
+    //DELETE api/categories/
     [HttpDelete("{id:int}")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> DeleteBook(int id)
+    public async Task<IActionResult> DeleteCategory(int id)
     {
       if (id < 1) return BadRequest();
 
-      var book = await _unitOfWork.Books.Get(q => q.Id == id);
+      var category = await _unitOfWork.Categories.Get(q => q.Id == id);
+      if (category is null) return NotFound($"Não foi encontrado um registo com ID {id}");
 
-      if (book is null) return NotFound($"Não foi encontrado um registo com ID {id}");
-
-      await _unitOfWork.Books.Delete(id);
+      await _unitOfWork.Categories.Delete(id);
       await _unitOfWork.ToSave();
 
       return NoContent();

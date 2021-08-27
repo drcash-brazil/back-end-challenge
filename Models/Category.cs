@@ -15,7 +15,7 @@ namespace back_end_challenge.Models
     [MinLength(3, ErrorMessage = "This field must have at least 3 character.")]
     public string nome { get; set; }
 
-    [NotMapped]
+    // [NotMapped]
     public virtual IList<Books> Books { get; set; }
 
   }

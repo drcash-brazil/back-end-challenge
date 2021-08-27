@@ -8,9 +8,17 @@ namespace back_end_challenge.Profiles
   {
     public AppProfile()
     {
-      CreateMap<Books, BooksReadDto>();
-      CreateMap<BooksDto, Books>();
-      CreateMap<Books, BooksDto>();
+      CreateMap<Books, BooksReadDto>().ReverseMap();
+      CreateMap<Books, BookCreateDto>().ReverseMap();
+      CreateMap<Books, BookUpdateDto>().ReverseMap();
+
+      CreateMap<Category, CategoryReadDto>().ReverseMap();
+      CreateMap<Category, CategoryCreateDto>().ReverseMap();
+      CreateMap<Category, CategoryUpdateDto>().ReverseMap();
+
+      CreateMap<Authors, AuthorReadDto>().ReverseMap();
+      CreateMap<Authors, AuthorCreateDto>().ReverseMap();
+      CreateMap<Authors, AuthorUpdateDto>().ReverseMap();
     }
   }
 }
