@@ -20,12 +20,14 @@ namespace back_end_challenge.Controllers
     private readonly ILogger<AuthorsController> _logger;
     private readonly IMapper _mapper;
 
+
     public AuthorsController(IUnitOfWork unitOfWork, ILogger<AuthorsController> logger, IMapper mapper)
     {
       _unitOfWork = unitOfWork;
       _logger = logger;
       _mapper = mapper;
     }
+
 
     //GET api/authors/
     [HttpGet]
@@ -39,6 +41,7 @@ namespace back_end_challenge.Controllers
       var result = _mapper.Map<IList<AuthorReadDto>>(entities);
       return Ok(result);
     }
+
 
     //GET api/authors/{id}
     [HttpGet("{id:int}", Name = "GetAuthorById")]
@@ -63,6 +66,7 @@ namespace back_end_challenge.Controllers
       var result = _mapper.Map<IList<AuthorReadDto>>(entities);
       return Ok(result);
     }
+
 
     //GET api/authors/{id}/books
     [HttpGet("{id:int}/books")]
@@ -93,6 +97,7 @@ namespace back_end_challenge.Controllers
 
       return CreatedAtRoute(nameof(GetAuthorById), new { Id = entity.Id }, entity);
     }
+
 
     //POST api/authors/
     [HttpPut("{id:int}")]

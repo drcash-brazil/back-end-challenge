@@ -27,6 +27,7 @@ namespace back_end_challenge.Controllers
       _mapper = mapper;
     }
 
+
     //GET api/categories/
     [HttpGet]
     public async Task<IActionResult> GetAllCategories([FromQuery] RequestParams requestParams)
@@ -40,15 +41,16 @@ namespace back_end_challenge.Controllers
       return Ok(result);
     }
 
+
     //GET api/categories/{id}
     [HttpGet("{id:int}", Name = "GetCategoryById")]
-
     public async Task<IActionResult> GetCategoryById(int id)
     {
       var entity = await _unitOfWork.Categories.Get(x => x.Id == id, new List<string> { "Books" });
       var result = _mapper.Map<CategoryReadDto>(entity);
       return Ok(result);
     }
+
 
     //GET api/categories/{name}
     [HttpGet("{name}")]
@@ -91,6 +93,7 @@ namespace back_end_challenge.Controllers
       return CreatedAtRoute(nameof(GetCategoryById), new { Id = entity.Id }, entity);
     }
 
+
     //PUT api/categories/
     [HttpPut("{id:int}")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -110,6 +113,7 @@ namespace back_end_challenge.Controllers
 
       return NoContent();
     }
+
 
     //DELETE api/categories/
     [HttpDelete("{id:int}")]
