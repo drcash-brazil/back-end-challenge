@@ -30,7 +30,6 @@ namespace back_end_challenge.Controllers
 
 
     //GET api/categories/
-    [Authorize]
     [HttpGet]
     public async Task<IActionResult> GetAllCategories([FromQuery] RequestParams requestParams)
     {
@@ -45,7 +44,6 @@ namespace back_end_challenge.Controllers
 
 
     //GET api/categories/{id}
-    [Authorize]
     [HttpGet("{id:int}", Name = "GetCategoryById")]
     public async Task<IActionResult> GetCategoryById(int id)
     {
@@ -81,7 +79,6 @@ namespace back_end_challenge.Controllers
 
 
     //POST api/categories/
-    [Authorize]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status201Created)]
