@@ -14,7 +14,7 @@ using Microsoft.Extensions.Logging;
 
 namespace back_end_challenge.Controllers
 {
-  [Route("api/authors")]
+  [Route("api/account")]
   [ApiController]
   public class AccountController : ControllerBase
   {
@@ -75,6 +75,9 @@ namespace back_end_challenge.Controllers
 
     [HttpPost]
     [Route("login")]
+    [ProducesResponseType(StatusCodes.Status202Accepted)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> Login([FromBody] LoginUserDto userDto)
     {
       _logger.LogInformation($"Login para {userDto.Email}");

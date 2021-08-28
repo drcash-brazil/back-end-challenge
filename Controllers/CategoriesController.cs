@@ -6,6 +6,7 @@ using AutoMapper;
 using back_end_challenge.Dtos;
 using back_end_challenge.IRepository;
 using back_end_challenge.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -29,6 +30,7 @@ namespace back_end_challenge.Controllers
 
 
     //GET api/categories/
+    [Authorize]
     [HttpGet]
     public async Task<IActionResult> GetAllCategories([FromQuery] RequestParams requestParams)
     {
@@ -43,6 +45,7 @@ namespace back_end_challenge.Controllers
 
 
     //GET api/categories/{id}
+    [Authorize]
     [HttpGet("{id:int}", Name = "GetCategoryById")]
     public async Task<IActionResult> GetCategoryById(int id)
     {
@@ -78,6 +81,7 @@ namespace back_end_challenge.Controllers
 
 
     //POST api/categories/
+    [Authorize]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status201Created)]

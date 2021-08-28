@@ -75,6 +75,7 @@ namespace back_end_challenge
 
       app.UseRouting();
 
+      app.UseAuthentication();
       app.UseAuthorization();
 
       app.UseEndpoints(endpoints =>
