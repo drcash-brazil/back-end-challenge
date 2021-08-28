@@ -19,24 +19,24 @@ namespace back_end_challenge.Controllers
   {
     // private readonly IUnitOfWork _unitOfWork;
     private readonly UserManager<Users> _userManager;
-    private readonly SignInManager<Users> _sigInManager;
     private readonly ILogger<AccountController> _logger;
     private readonly IMapper _mapper;
 
 
     public AccountController(UserManager<Users> userManager,
-        SignInManager<Users> signInManager,
         ILogger<AccountController> logger,
         IMapper mapper)
     {
       _userManager = userManager;
-      _sigInManager = signInManager;
       _logger = logger;
       _mapper = mapper;
     }
 
     [HttpPost]
     [Route("register")]
+    [ProducesResponseType(StatusCodes.Status202Accepted)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> Register([FromBody] UserCreateDto userDto)
     {
       _logger.LogInformation($"Registro para {userDto.Email}");
@@ -46,9 +46,17 @@ namespace back_end_challenge.Controllers
       try
       {
         var user = _mapper.Map<Users>(userDto);
-        var result = await _userManager.CreateAsync(user);
+        user.UserName = userDto.Email;
+        var result = await _userManager.CreateAsync(user, userDto.Password);
 
-        if (!result.Succeeded) return BadRequest($"Registo de usuário falhou, por favor tente novamente");
+        if (!result.Succeeded)
+        {
+          foreach (var error in result.Errors)
+          {
+            ModelState.AddModelError(error.Code, error.Description);
+          }
+          return BadRequest(ModelState);
+        }
         return Accepted();
       }
       catch (Exception ex)
@@ -59,26 +67,26 @@ namespace back_end_challenge.Controllers
     }
 
 
-    [HttpPost]
-    [Route("login")]
-    public async Task<IActionResult> Login([FromBody] LoginUserDto userDto)
-    {
-      _logger.LogInformation($"Login para {userDto.Email}");
+    // [HttpPost]
+    // [Route("login")]
+    // public async Task<IActionResult> Login([FromBody] LoginUserDto userDto)
+    // {
+    //   _logger.LogInformation($"Login para {userDto.Email}");
 
-      if (!ModelState.IsValid) return BadRequest(ModelState);
+    //   if (!ModelState.IsValid) return BadRequest(ModelState);
 
-      try
-      {
-        var result = await _sigInManager.PasswordSignInAsync(userDto.Email, userDto.Password, false, false);
-        if (!result.Succeeded) return Unauthorized(userDto);
-        return Accepted();
-      }
-      catch (Exception ex)
-      {
-        _logger.LogError(ex, $"Ocorreu um erro em {nameof(Login)}");
-        return StatusCode(500, "Ocorreu um erro interno. Por favor tente mais tarde");
-      }
-    }
+    //   try
+    //   {
+    //     var result = await _sigInManager.PasswordSignInAsync(userDto.Email, userDto.Password, false, false);
+    //     if (!result.Succeeded) return Unauthorized(userDto);
+    //     return Accepted();
+    //   }
+    //   catch (Exception ex)
+    //   {
+    //     _logger.LogError(ex, $"Ocorreu um erro em {nameof(Login)}");
+    //     return StatusCode(500, "Ocorreu um erro interno. Por favor tente mais tarde");
+    //   }
+    // }
 
   }
 }
