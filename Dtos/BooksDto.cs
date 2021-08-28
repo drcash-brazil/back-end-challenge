@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace back_end_challenge.Dtos
@@ -29,6 +30,9 @@ namespace back_end_challenge.Dtos
     public int NumCopias { get; set; }
     public AuthorReadDto Authors { get; set; }
     public CategoryReadDto Categories { get; set; }
+
+    public IList<BookSalesReadDto> BookSales { get; set; }
+
   }
 
 }

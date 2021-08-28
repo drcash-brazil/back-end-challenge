@@ -71,12 +71,19 @@ namespace back_end_challenge.Controllers
 
     //POST api/books/
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> CreateBook([FromBody] BookCreateDto bookDto)
     {
       if (!ModelState.IsValid) return BadRequest(ModelState);
+
+      var category = await _unitOfWork.Categories.Get(x => x.Id == bookDto.CategoryId);
+      if (category is null) return NotFound($"Não foi encontrado nenhum genero com id {bookDto.CategoryId}");
+
+      var author = await _unitOfWork.Authors.Get(x => x.Id == bookDto.AutorId);
+      if (author is null) return NotFound($"Não foi encontrado nenhum autor com id {bookDto.AutorId}");
 
       var entity = _mapper.Map<Books>(bookDto);
       await _unitOfWork.Books.Insert(entity);
@@ -92,7 +99,7 @@ namespace back_end_challenge.Controllers
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> CreateRangeBooks([FromBody] IEnumerable<BookCreateDto> entityDto)
+    public async Task<IActionResult> CreateRangeBooks([FromBody] IEnumerable<BookCreateDto> booksDto)
     {
       if (!ModelState.IsValid)
       {
@@ -100,7 +107,16 @@ namespace back_end_challenge.Controllers
         return BadRequest(ModelState);
       }
 
-      var entity = _mapper.Map<IEnumerable<Books>>(entityDto);
+      foreach (var book in booksDto)
+      {
+        var category = await _unitOfWork.Categories.Get(x => x.Id == book.CategoryId);
+        if (category is null) return NotFound($"Não foi encontrado nenhum genero com id {book.CategoryId}");
+
+        var author = await _unitOfWork.Authors.Get(x => x.Id == book.AutorId);
+        if (author is null) return NotFound($"Não foi encontrado nenhum autor com id {book.AutorId}");
+      }
+
+      var entity = _mapper.Map<IEnumerable<Books>>(booksDto);
       await _unitOfWork.Books.InsertRange(entity);
       await _unitOfWork.ToSave();
 

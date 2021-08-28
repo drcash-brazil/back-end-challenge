@@ -10,8 +10,8 @@ using back_end_challenge.Models;
 namespace back_end_challenge.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210828025030_changes")]
-    partial class changes
+    [Migration("20210828131437_Models")]
+    partial class Models
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,6 +46,29 @@ namespace back_end_challenge.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "f7ecc148-bd9c-4dbd-b654-ea90a3bfc36f",
+                            ConcurrencyStamp = "bc3eefe6-f0e8-4687-b641-704318b1a4e8",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "98804ef9-e39e-409a-b62d-0bc3ad02ff06",
+                            ConcurrencyStamp = "8388f379-10e6-40a1-bcf6-b5d41f62bdbb",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "d67ca6b0-23d0-4d8a-ba55-7b3303a05fcf",
+                            ConcurrencyStamp = "d1c222d7-aa76-4929-9ed5-e1f20fcfbda3",
+                            Name = "Employee",
+                            NormalizedName = "EMPLOYEE"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -216,6 +239,36 @@ namespace back_end_challenge.Migrations
                     b.ToTable("Category");
                 });
 
+            modelBuilder.Entity("back_end_challenge.Models.SellBooks", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClientEmail")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("ClientName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("QuantityToReduce")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("SellBooks");
+                });
+
             modelBuilder.Entity("back_end_challenge.Models.Users", b =>
                 {
                     b.Property<string>("Id")
@@ -355,6 +408,17 @@ namespace back_end_challenge.Migrations
                     b.Navigation("Authors");
 
                     b.Navigation("Categories");
+                });
+
+            modelBuilder.Entity("back_end_challenge.Models.SellBooks", b =>
+                {
+                    b.HasOne("back_end_challenge.Models.Books", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
                 });
 
             modelBuilder.Entity("back_end_challenge.Models.Authors", b =>

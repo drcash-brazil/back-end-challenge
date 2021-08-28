@@ -8,6 +8,7 @@ namespace back_end_challenge.IRepository
   {
     IGenericRepository<Authors> Authors { get; }
     IGenericRepository<Category> Categories { get; }
+    IGenericRepository<BookSales> BookSales { get; }
     IGenericRepository<Books> Books { get; }
     Task ToSave();
   }

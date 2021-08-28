@@ -208,6 +208,43 @@ namespace back_end_challenge.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "SellBooks",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ClientName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    ClientEmail = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    QuantityToReduce = table.Column<int>(type: "int", nullable: false),
+                    BookId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SellBooks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SellBooks_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "f7ecc148-bd9c-4dbd-b654-ea90a3bfc36f", "bc3eefe6-f0e8-4687-b641-704318b1a4e8", "User", "USER" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "98804ef9-e39e-409a-b62d-0bc3ad02ff06", "8388f379-10e6-40a1-bcf6-b5d41f62bdbb", "Admin", "ADMIN" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "d67ca6b0-23d0-4d8a-ba55-7b3303a05fcf", "d1c222d7-aa76-4929-9ed5-e1f20fcfbda3", "Employee", "EMPLOYEE" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -256,6 +293,11 @@ namespace back_end_challenge.Migrations
                 name: "IX_Books_CategoryId",
                 table: "Books",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SellBooks_BookId",
+                table: "SellBooks",
+                column: "BookId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -276,13 +318,16 @@ namespace back_end_challenge.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Books");
+                name: "SellBooks");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Books");
 
             migrationBuilder.DropTable(
                 name: "Authors");
