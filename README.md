@@ -82,13 +82,14 @@ automatizado para o armazenamento de dados em banco de dados.
 
 Pretendo continuar a desenvolver este projecto e deixá-lo mais sério de modo a que possa tornar-se um projecto padrão e de referência para qualquer Livraria.
 
-**Planos de Melhoria**
+**Planos de Melhorias**
 1. Pretendo adicionar mais informações nas tabelas de modo que tenha-se dados mais precisos;
 2. Implementar a área de autenticação e gerenciamento de usuários de modo que o senhor Gabriel possa espandir o seu negócio e poder adicionar os seus funcionários para ajudarem no processo de venda de livros (**obs:** este ponto já encontra-se em desenvolvimento);
 3. Adicionar restrições de acesso  as rotas da API e atribuição de permissões para usuário da plataforma (**https://github.com/derciosinione/back-end-challenge/tree/feat/AuthPrivatedRoutes**);
 4. Adicionar um sistema de venda de livros e gerenciamento de stock (**obs:** este ponto já encontra-se em desenvolvimento);
 5. Implementar a Área de Relatório de vendas e livros mais adquiridos;
 6. Adicionar a possibilidade de um usário entrar na plataforma e comprar um lívro;
+
 
 **ATENÇÃO**
 
