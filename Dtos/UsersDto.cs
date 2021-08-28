@@ -22,15 +22,12 @@ namespace back_end_challenge.Dtos
 
     [DataType(DataType.PhoneNumber)]
     public string PhoneNumber { get; set; }
+    public ICollection<string> Roles { get; set; }
 
   }
 
   public class UserUpdateDto : UserCreateDto { }
 
-  public class UserReadDto : UserCreateDto
-  {
-    public int Id { get; set; }
-
-  }
+  public class UserReadDto : UserCreateDto { }
 
 }

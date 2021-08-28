@@ -16,8 +16,8 @@ namespace back_end_challenge.Profiles.Entities
         },
         new IdentityRole
         {
-          Name = "Administrator",
-          NormalizedName = "ADMINISTRATOR"
+          Name = "Admin",
+          NormalizedName = "ADMIN"
         },
         new IdentityRole
         {

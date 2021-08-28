@@ -1,4 +1,6 @@
+using System.Collections.Immutable;
 using back_end_challenge.Models;
+using back_end_challenge.Profiles.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +15,9 @@ namespace back_end_challenge.Models
     protected override void OnModelCreating(ModelBuilder builder)
     {
       base.OnModelCreating(builder);
+
+      builder.ApplyConfiguration(new RoleConfiguration());
+
     }
     public DbSet<Books> Books { get; set; }
     public DbSet<Category> Category { get; set; }

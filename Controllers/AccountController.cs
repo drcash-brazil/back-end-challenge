@@ -57,6 +57,8 @@ namespace back_end_challenge.Controllers
           }
           return BadRequest(ModelState);
         }
+
+        await _userManager.AddToRolesAsync(user, userDto.Roles);
         return Accepted();
       }
       catch (Exception ex)
