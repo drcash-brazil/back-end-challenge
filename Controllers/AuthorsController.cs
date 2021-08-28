@@ -100,7 +100,8 @@ namespace back_end_challenge.Controllers
 
 
     //POST api/authors/
-    [HttpPost("range")]
+    [HttpPost]
+    [Route("range")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]

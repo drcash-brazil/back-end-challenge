@@ -19,6 +19,11 @@ namespace back_end_challenge.Profiles
       CreateMap<Authors, AuthorReadDto>().ReverseMap();
       CreateMap<Authors, AuthorCreateDto>().ReverseMap();
       CreateMap<Authors, AuthorUpdateDto>().ReverseMap();
+
+      CreateMap<Users, UserCreateDto>().ReverseMap();
+      CreateMap<Users, LoginUserDto>().ReverseMap();
+
+
     }
   }
 }
