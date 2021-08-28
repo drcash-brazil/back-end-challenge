@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using back_end_challenge.IRepository;
 using back_end_challenge.Models;
 using back_end_challenge.Repositories;
+using back_end_challenge.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,9 +39,11 @@ namespace back_end_challenge
 
       services.AddAuthentication();
       services.ConfigureIdentity();
+      services.ConfigureJWT(Configuration);
 
       services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
       services.AddTransient<IUnitOfWork, UnitOfWork>();
+      services.AddScoped<IAuthManager, AuthManager>();
 
       services.AddCors(o =>
       {

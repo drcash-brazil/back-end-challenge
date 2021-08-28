@@ -1,10 +1,14 @@
+using System.Text;
+using System;
 using back_end_challenge.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using Microsoft.IdentityModel.Tokens;
 
 namespace back_end_challenge
 {
@@ -42,5 +46,27 @@ namespace back_end_challenge
       });
     }
 
+    public static void ConfigureJWT(this IServiceCollection services, IConfiguration Configuration)
+    {
+      var jwtSettings = Configuration.GetSection("Jwt");
+      var env = Environment.GetEnvironmentVariable("KEY");
+      var key = env != "" ? env : "ccb5f4bd-dd5a-411b-afff-245fd5daa620";
+
+      services.AddAuthentication(o =>
+      {
+        o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+      }).AddJwtBearer(o =>
+      {
+        o.TokenValidationParameters = new TokenValidationParameters
+        {
+          ValidateIssuer = true,
+          ValidateLifetime = true,
+          ValidateIssuerSigningKey = true,
+          ValidIssuer = jwtSettings.GetSection("Issuer").Value,
+          IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
+        };
+      });
+    }
   }
 }
