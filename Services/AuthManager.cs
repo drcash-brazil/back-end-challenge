@@ -7,8 +7,8 @@ using back_end_challenge.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using System;
+using System.Text;
 
 namespace back_end_challenge.Services
 {
@@ -67,8 +67,8 @@ namespace back_end_challenge.Services
 
     private SigningCredentials GetSigninCredentials()
     {
-      var env = Environment.GetEnvironmentVariable("KEY");
-      var key = env != "" ? env : "ccb5f4bd-dd5a-411b-afff-245fd5daa620";
+      var jwtSettings = _configuration.GetSection("Jwt");
+      var key = jwtSettings.GetSection("Secret").Value;
       var secret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
 
       return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);

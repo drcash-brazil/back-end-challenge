@@ -6,6 +6,7 @@ using AutoMapper;
 using back_end_challenge.Dtos;
 using back_end_challenge.IRepository;
 using back_end_challenge.Models;
+using back_end_challenge.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -21,13 +22,16 @@ namespace back_end_challenge.Controllers
     private readonly UserManager<Users> _userManager;
     private readonly ILogger<AccountController> _logger;
     private readonly IMapper _mapper;
+    private readonly IAuthManager _authManager;
 
 
     public AccountController(UserManager<Users> userManager,
         ILogger<AccountController> logger,
+        IAuthManager authManager,
         IMapper mapper)
     {
       _userManager = userManager;
+      _authManager = authManager;
       _logger = logger;
       _mapper = mapper;
     }
@@ -69,26 +73,26 @@ namespace back_end_challenge.Controllers
     }
 
 
-    // [HttpPost]
-    // [Route("login")]
-    // public async Task<IActionResult> Login([FromBody] LoginUserDto userDto)
-    // {
-    //   _logger.LogInformation($"Login para {userDto.Email}");
+    [HttpPost]
+    [Route("login")]
+    public async Task<IActionResult> Login([FromBody] LoginUserDto userDto)
+    {
+      _logger.LogInformation($"Login para {userDto.Email}");
 
-    //   if (!ModelState.IsValid) return BadRequest(ModelState);
+      if (!ModelState.IsValid) return BadRequest(ModelState);
 
-    //   try
-    //   {
-    //     var result = await _sigInManager.PasswordSignInAsync(userDto.Email, userDto.Password, false, false);
-    //     if (!result.Succeeded) return Unauthorized(userDto);
-    //     return Accepted();
-    //   }
-    //   catch (Exception ex)
-    //   {
-    //     _logger.LogError(ex, $"Ocorreu um erro em {nameof(Login)}");
-    //     return StatusCode(500, "Ocorreu um erro interno. Por favor tente mais tarde");
-    //   }
-    // }
+      try
+      {
+        if (!await _authManager.ValidateUser(userDto)) return Unauthorized();
+
+        return Accepted(new { Token = await _authManager.CreateToken() });
+      }
+      catch (Exception ex)
+      {
+        _logger.LogError(ex, $"Ocorreu um erro em {nameof(Login)}");
+        return StatusCode(500, "Ocorreu um erro interno. Por favor tente mais tarde");
+      }
+    }
 
   }
 }

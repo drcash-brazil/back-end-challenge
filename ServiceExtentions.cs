@@ -49,8 +49,7 @@ namespace back_end_challenge
     public static void ConfigureJWT(this IServiceCollection services, IConfiguration Configuration)
     {
       var jwtSettings = Configuration.GetSection("Jwt");
-      var env = Environment.GetEnvironmentVariable("KEY");
-      var key = env != "" ? env : "ccb5f4bd-dd5a-411b-afff-245fd5daa620";
+      var key = jwtSettings.GetSection("Secret").Value;
 
       services.AddAuthentication(o =>
       {
