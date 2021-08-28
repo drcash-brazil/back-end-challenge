@@ -28,7 +28,9 @@ namespace back_end_challenge.Profiles
 
       CreateMap<BookSales, BookSalesCreateDto>().ReverseMap();
       CreateMap<BookSales, BookSalesReadDto>().ReverseMap();
+      CreateMap<BooksReadDto, BookSalesReadDto>().ReverseMap();
       CreateMap<BookSales, BookSalesUpdateDto>().ReverseMap();
+      CreateMap<BooksReadDto, BookSalesReadDto>().ReverseMap();
 
     }
   }

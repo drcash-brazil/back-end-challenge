@@ -30,8 +30,7 @@ namespace back_end_challenge.Dtos
     public int NumCopias { get; set; }
     public AuthorReadDto Authors { get; set; }
     public CategoryReadDto Categories { get; set; }
-
-    public IList<BookSalesReadDto> BookSales { get; set; }
+    public virtual IList<BookSalesReadDto> Sales { get; set; }
 
   }
 

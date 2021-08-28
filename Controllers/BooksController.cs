@@ -52,6 +52,15 @@ namespace back_end_challenge.Controllers
       return Ok(result);
     }
 
+    //GET api/books/{id}
+    [HttpGet("{id:int}sales", Name = "GetBookByIdSales")]
+    public async Task<IActionResult> GetBookByIdSales(int id)
+    {
+      var entity = await _unitOfWork.Books.Get(x => x.Id == id, new List<string> { "Authors", "Categories", "Sales" });
+      var result = _mapper.Map<BooksReadDto>(entity);
+      return Ok(result);
+    }
+
 
     //GET api/authors/{name}
     [HttpGet("{name}")]
@@ -67,6 +76,8 @@ namespace back_end_challenge.Controllers
       var result = _mapper.Map<IList<BooksReadDto>>(entities);
       return Ok(result);
     }
+
+
 
 
     //POST api/books/

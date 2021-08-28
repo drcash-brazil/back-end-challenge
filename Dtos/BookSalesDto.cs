@@ -26,10 +26,10 @@ namespace back_end_challenge.Dtos
 
   public class BookSalesUpdateDto : BookSalesCreateDto { }
 
-  public class BookSalesReadDto
+  public class BookSalesReadDto : BookSalesCreateDto
   {
     public int Id { get; set; }
-    public IList<BooksReadDto> Books { get; set; }
+    public BooksReadDto Book { get; set; }
 
   }
 

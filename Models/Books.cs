@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace back_end_challenge.Models
 {
@@ -24,6 +25,8 @@ namespace back_end_challenge.Models
     [ForeignKey(nameof(Category))]
     public int CategoryId { get; set; }
     public Category Categories { get; set; }
+
+    public virtual IList<BookSales> Sales { get; set; }
 
   }
 }

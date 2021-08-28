@@ -35,7 +35,6 @@ namespace back_end_challenge.Controllers
     {
       var entities = await _unitOfWork.BookSales.GetAll(
           requestParams: requestParams,
-          // includes: (new List<string> { "Books", }),
           includes: (new List<string> { "Book", "Book.Authors", "Book.Categories" }),
           orderBy: q => q.OrderByDescending(x => x.Id)
       );
@@ -49,7 +48,7 @@ namespace back_end_challenge.Controllers
     [HttpGet("{id:int}", Name = "GetSaleById")]
     public async Task<IActionResult> GetSaleById(int id)
     {
-      var entity = await _unitOfWork.BookSales.Get(x => x.Id == id);
+      var entity = await _unitOfWork.BookSales.Get(x => x.Id == id, (new List<string> { "Book", "Book.Authors", "Book.Categories" }));
 
       var result = _mapper.Map<BookSalesReadDto>(entity);
       return Ok(result);
@@ -59,6 +58,7 @@ namespace back_end_challenge.Controllers
 
     //POST api/sales/
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -72,8 +72,11 @@ namespace back_end_challenge.Controllers
       }
 
       var book = await _unitOfWork.Books.Get(x => x.Id == bookSaleDto.BookId);
-      book.NumCopias = book.NumCopias - bookSaleDto.QuantityToReduce;
-      await _unitOfWork.ToSave();
+
+      if (book is null) return NotFound($"Não foi encontrado nenhum livro com ID {bookSaleDto.BookId}");
+
+      book.NumCopias -= bookSaleDto.QuantityToReduce;
+      _unitOfWork.Books.Update(book);
 
       var entity = _mapper.Map<BookSales>(bookSaleDto);
       await _unitOfWork.BookSales.Insert(entity);
