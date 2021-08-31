@@ -32,13 +32,28 @@ Gabriel tem que ser capaz de adicionar novos gêneros e autores para usar no cad
 
 **Atenção** - Informe quais recursos de terceriros foram utilizados no projeto e descreva o por quê.
 
+*   Microsoft.EntityFrameworkCore (5.0.9)
+        Para criação e utilização do banco de dados utilizando a abordagem code first e manipulação utilizando as rotinas de consultas do C#
+*   Microsoft.EntityFrameworkCore.SqlServer (5.0.9)
+        Database provider do SQL Server para o EntityFramework
+*   Microsoft.EntityFrameworkCore.Tools (5.0.9)
+        Ferramentas do EntityFramework para possibilitar o uso de comandos para gerenciamento das migrations e do banco de dados
+*   Swashbuckle.AspNetCore (5.6.3)
+        Ferramenta para documentação da API
 
 ## Experiência com o projeto 
-    # Descreva sua experiênca com o projeto, tanto na parte técnica quanto na parte teórica.
+    Como estou familiarizado com as tecnologias do mundo .NET na parte técnica o desenvolvimento fluiu naturalmente, entretanto
+    com algumas pesquisas encontrei meios diferentes de pensar e organizar o projeto dos quais tinha utilizado em projetos anteriores
+    trazendo assim uma experiência nova e divertida durante o desenvolvimento.
 
 ## Futuro
 
-Descreva sobre possíveis planos para este projeto, melhorias ou alterações que você realizaria em prol de aumentar a qualidade no desenvolvimento.
+    1. Armazenar o ISBN do livro, evitando assim ambiguidades durante a identificação.
+    2. Implementar sistema de autenticação e restrições de acesso as rotas da API.
+    3. Armazenar mais informações à respeito dos livros como data de publicação, editora, idioma, etc.
+    4. Implementar sistema de geração de relatório do estoque.
+    5. Implementar serviço de realização periódica de backup do banco de dados.
+
 
 **ATENÇÃO**
 
