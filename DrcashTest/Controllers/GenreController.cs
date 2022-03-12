@@ -14,9 +14,9 @@ namespace DrcashTest.Controllers
     [ApiController]
     public class GenreController : ControllerBase
     {
-        private BookContext _BookContext;
+        private DataContext _BookContext;
 
-        public GenreController(BookContext context)
+        public GenreController(DataContext context)
         {
             _BookContext = context;
         }

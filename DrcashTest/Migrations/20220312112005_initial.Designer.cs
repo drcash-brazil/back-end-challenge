@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DrcashTest.Migrations
 {
-    [DbContext(typeof(BookContext))]
+    [DbContext(typeof(DataContext))]
     [Migration("20220312112005_initial")]
     partial class initial
     {
