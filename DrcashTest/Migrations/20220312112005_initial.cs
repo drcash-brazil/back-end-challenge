@@ -18,6 +18,7 @@ namespace DrcashTest.Migrations
                 {
                     table.PrimaryKey("PK_Authors", x => x.AuthorId);
                 });
+                
 
             migrationBuilder.CreateTable(
                 name: "Genres",
