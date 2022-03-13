@@ -25,20 +25,37 @@ Um livro possui:
 
 Gabriel tem que ser capaz de adicionar novos gêneros e autores para usar no cadastro de livros. 
 
-### Obs.: instância do SQL Server deve estar conectado ao localhost
+Documentação da solução desenvolvida para dar resposta ao problema apresentado Pela livraria do Gabriel
 
-## Frameworks aplicadas no projeto
+### Rota da documentação da API
+**https://localhost:5001/index.html**
+**http://localhost:5000/index.html**
 
+### Obs.: instância para estabelecer a conexão com o SQL Server deve ser o **localhost**
 
-**Atenção** - Informe quais recursos de terceriros foram utilizados no projeto e descreva o por quê.
+### Ferramentas utilizadas para o desenvolvimento da solução da livraria do Sr. Gabriel
+
+**Microsoft.AspNetCore.Identity.EntityFrameworkCore:** é uma estrutura de Mapeamento Objeto Relacional (ORM), e fornece os desenvolvedores .Net um mecanismo 
+automatizado para o armazenamento de dados em banco de dados.
+
+**Microsoft.EntityFrameworkCore.SqlServer:** é um provedor de banco de dados Microsoft SQL Server para Entity Framework Core.
+
+**Swashbuckle.AspNetCore:** Usada para documentação da API, é uma ferramentas Swagger para documentar APIs construídas no ASP.NET Core.
+**https://localhost:5001/index.html**
 
 
 ## Experiência com o projeto 
-    # Descreva sua experiênca com o projeto, tanto na parte técnica quanto na parte teórica.
+    #   Desenvolver a solução deste projecto foi uma experiência bastante boa e sobre tudo desafiadora, pois pude evoluir as minhas competências, metodologias e análise para resolução de novos problemas (desafios).
+        Foram aplicados alguns conceitos de do  padrão de unidade (Unit of Work), que facilitou na definição e escalabilidade nas regras de negócio na solução desenvolvida.
 
 ## Futuro
 
-Descreva sobre possíveis planos para este projeto, melhorias ou alterações que você realizaria em prol de aumentar a qualidade no desenvolvimento.
+Pretendo dar sequência no desenvolvimento desta solução  de modo a torna-lo adaptável para diversas livraria.
+
+**Proximos passos**
+1. Adicionar novos modolos e funcionalidade do projecto (vendas,registo de stock,registo de clientes,etc);
+2. Implementar a área de autenticação e gerenciamento de usuários
+3. Adicionar restrições de acesso  as rotas da API de modo a manter a segurança e integridade dos dados; 
 
 **ATENÇÃO**
 
@@ -52,8 +69,3 @@ O processo de Pull Request funciona da seguinte maneira:
 3. Commit e suba as alterações para o SEU fork;
 4. Pela interface do Github, envie um Pull Request.
 5. Deixe o fork público para facilitar a inspeção do código.
-
-
-Obs.: Não tente fazer o PUSH diretamente para ESTE repositório!
-
-**A data limite para entrega desse desafio é: 29/08/2021**
