@@ -28,10 +28,9 @@ Gabriel tem que ser capaz de adicionar novos gêneros e autores para usar no cad
 Documentação da solução desenvolvida para dar resposta ao problema apresentado Pela livraria do Gabriel
 
 ### Rota da documentação da API
-**https://localhost:5001/index.html**
-**http://localhost:5000/index.html**
+**https://localhost:5001/swagger/index.html**
 
-### Obs.: instância para estabelecer a conexão com o SQL Server deve ser o **localhost**
+### Obs: instância para estabelecer a conexão com o SQL Server deve ser o **localhost**
 
 ### Ferramentas utilizadas para o desenvolvimento da solução da livraria do Sr. Gabriel
 
