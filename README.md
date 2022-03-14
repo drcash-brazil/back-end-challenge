@@ -31,14 +31,20 @@ Gabriel tem que ser capaz de adicionar novos gêneros e autores para usar no cad
 
 
 **Atenção** - Informe quais recursos de terceriros foram utilizados no projeto e descreva o por quê.
-
+- Foi utilizado Swagger para criar uma interface amigável e documentação json para quem for utilizar. 
 
 ## Experiência com o projeto 
-    # Descreva sua experiênca com o projeto, tanto na parte técnica quanto na parte teórica.
+- Experiência boa, com esse projeto apenas foi reforçado os conhecimentos já existentes, além de adicionar um projeto novo no portifólio.
 
 ## Futuro
 
-Descreva sobre possíveis planos para este projeto, melhorias ou alterações que você realizaria em prol de aumentar a qualidade no desenvolvimento.
+Planos para o futuro:
+- Implementar autenticação para segurança dos dados e de controle de acesso ou criar um microserviço.
+- Definir melhor o padrão de retorno dos dados, embora tenha sido criado um padrão que não se sabe se atenderá.
+- Implementar paginação e limite de quantidade de registros no get de listar;
+- Definir as próximas funcionalidades que sejam prioritárias para o MVP;
+- Definir se a arquitetura adotada suportará maiores atualizações;
+
 
 **ATENÇÃO**
 
