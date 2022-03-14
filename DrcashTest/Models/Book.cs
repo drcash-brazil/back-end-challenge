@@ -11,18 +11,19 @@ namespace DrcashTest.Models
     public class Book
     {
         [Key]
-        public Guid BookId { get; set; }
-        [Required(ErrorMessage = "Title is required")]
-        public string Title { get; set; }
-        [ForeignKey("Authors")]
-        [Required(ErrorMessage = "AuthorId is required")]
-        public Guid AuthorId { get; set; }
-        public virtual Author Author { get; set; }
-        [ForeignKey("Genres")]
-        [Required(ErrorMessage = "GenreId is required")]
-        public Guid GenreId { get; set; }
-        public virtual Genre Genre { get; set; }
+    public int Id { get; set; }
 
-        public int NumberCopies { get; set; }
+    [Required]
+    [MaxLength(50, ErrorMessage = "This field must have only 50 character.")]
+    [MinLength(3, ErrorMessage = "This field must have at least 3 character.")]
+    public string Titulo { get; set; }
+    
+    [ForeignKey(nameof(Authors))]
+    public int AutorId { get; set; }
+    public Authors Authors { get; set; }
+
+    [ForeignKey(nameof(Category))]
+    public int CategoryId { get; set; }
+    public Category Categories { get; set; }
     }
 }

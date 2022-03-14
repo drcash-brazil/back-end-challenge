@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DrcashTest.Models
-{
-  public class Authors
+  public class Category
   {
     [Key]
     public int Id { get; set; }
@@ -17,5 +16,6 @@ namespace DrcashTest.Models
 
     // [NotMapped]
     public virtual IList<Books> Books { get; set; }
+
   }
 }
