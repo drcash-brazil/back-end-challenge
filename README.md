@@ -35,6 +35,7 @@ Gabriel tem que ser capaz de adicionar novos gêneros e autores para usar no cad
 
 ## Experiência com o projeto 
 - Experiência boa, com esse projeto apenas foi reforçado os conhecimentos já existentes, além de adicionar um projeto novo no portifólio.
+- Tive oportunidade de criar um projeto multicamadas, cada uma com sua responsabilidade, baseada em DDD na qual estou habituado a trabalhar.
 
 ## Futuro
 
