@@ -30,7 +30,21 @@ namespace DrcashTest
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddDbContext<DataContext>(opt => opt.UseSqlServer(
-                 Configuration.GetConnectionString("DBConnection")));
+                Configuration.GetConnectionString("default"))
+            );
+
+            services.AddAuthentication();
+            services.ConfigureIdentity();
+            services.ConfigureJWT(Configuration);
+
+            services.AddControllers().AddNewtonsoftJson(opt => 
+         opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+      
+            services.AddCors(o =>
+            {
+                o.AddPolicy("AllowAll", builder => builder.AllowAnyMethod().AllowAnyHeader());
+            });
+
 
             services.AddSwaggerGen(Options=> {
                 Options.SwaggerDoc("v1",
@@ -41,11 +55,20 @@ namespace DrcashTest
                         Version ="v1"
                     });
             });
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddScoped<IAuthManager, AuthManager>();
+            services.AddScoped<IAuthorsRepository, AuthorsRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IBookRepository, BookRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseCors("AllowAll");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -54,9 +77,19 @@ namespace DrcashTest
             {
                 app.UseHsts();
             }
-
+            app.ConfigureExceptionHandler();
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
             app.UseSwagger();
             app.UseSwaggerUI(Options=> {
