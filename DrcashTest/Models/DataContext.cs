@@ -1,6 +1,6 @@
 using System.Collections.Immutable;
-using back_end_challenge.Models;
-using back_end_challenge.Profiles.Entities;
+using DrcashTest.Models;
+using DrcashTest.Profiles.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

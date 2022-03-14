@@ -1,6 +1,6 @@
 using AutoMapper;
-using back_end_challenge.Models;
-using back_end_challenge.Models.Dtos;
+using DrcashTest.Models;
+using DrcashTest.Models.Dtos;
 
 namespace DrcashTest.Profiles
 {

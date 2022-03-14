@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using back_end_challenge.Models;
+using DrcashTest.Models;
 
 namespace DrcashTest.IRepository
 {

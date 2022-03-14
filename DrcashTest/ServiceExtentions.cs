@@ -1,6 +1,6 @@
 using System.Text;
 using System;
-using back_end_challenge.Models;
+using DrcashTest.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;

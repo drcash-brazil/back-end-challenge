@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace DrcashTest.Models
+namespace DrcashTest.Models { 
   public class Error
   {
     public int StatusCode { get; set; }

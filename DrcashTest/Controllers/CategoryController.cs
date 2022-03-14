@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using back_end_challenge.IRepository;
-using back_end_challenge.Models;
-using back_end_challenge.Models.Dtos;
+using DrcashTest.IRepository;
+using DrcashTest.Models;
+using DrcashTest.Models.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

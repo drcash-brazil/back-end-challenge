@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace back_end_challenge.Migrations
+namespace DrcashTest.Migrations
 {
     public partial class InitialMigration : Migration
     {

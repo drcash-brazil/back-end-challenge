@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using back_end_challenge.IRepository;
-using back_end_challenge.Models;
+using DrcashTest.IRepository;
+using DrcashTest.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DrcashTest.Repositories

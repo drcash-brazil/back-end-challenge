@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DrcashTest.Models
 {
-    public class Book
+    public class Books
     {
         [Key]
     public int Id { get; set; }
