@@ -6,4 +6,5 @@ public interface IGenericRepository<T>
     void Update(T entity);
     IEnumerable<T> GetAll();
     T GetById(Guid id);
+    bool Delete(Guid id);
 }
