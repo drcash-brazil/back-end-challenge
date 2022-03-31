@@ -2,6 +2,20 @@
 
 Seja bem-vindo ao repositório do projeto Bookstore, um caso de uso que deve ser implementado contendo uma versão para plataforma web. Obrigado por participar do desafio da Dr.Cash! Estamos muito contentes pelo seu primeiro passo para fazer parte de um time excepcional.
 
+# Para Startar o projecto
+
+Criei um shell que facilitaria rodar a aplicação uma vez que foi trabalhado em camadas, para não ter que percorrer entre as pastas,
+a outra coisa eu usei uma instância local para conexão porêm a partir da imagem que gerei no Docker na minha maquina.
+
+Para alteração basta entrar em `BookStore.Domain.Api - appSettings.json e appSettings.Development.json` e alterar a connectionString para
+**Server=localhos\\SQLEXPRESS,1433;Database=bookStore;User ID=sa;Password=''** e a aplicação funciona lindamente
+
+O scripts a ser gerados
+
+```bash
+
+```
+
 ## Afinal, o que é esse desafio?
 
 Primeiramente é importante se atentar aos pilares da Dr.Cash, seguindo metodologias de desenvolvimento ágil.
@@ -13,32 +27,39 @@ Primeiramente é importante se atentar aos pilares da Dr.Cash, seguindo metodolo
 - [Autonomia] - Ser autodidata, proativo e fidelidade na busca constante por conhecimento.
 
 ## Desafio
-Gabriel é o dono de uma livraria e precisa de um software para fazer o controle do seu estoque de livros. Foi contratada uma empresa para implementar esse sistema e você é o desenvolvedor responsável pela implementação do back-end. 
+
+Gabriel é o dono de uma livraria e precisa de um software para fazer o controle do seu estoque de livros. Foi contratada uma empresa para implementar esse sistema e você é o desenvolvedor responsável pela implementação do back-end.
 
 Deve ser criado uma Web API RESTful em Asp.NET Core, onde devem conter as rotas responsáveis pelo CRUD de livros. Essa api deve estar conectada a uma instância de banco de dados Microsoft SQL Server utilizando Entity Framework.
 
-Um livro possui: 
-*	Título
-*	Autor
-*	Gênero
-*	Quantidade de cópias
+Um livro possui:
 
-Gabriel tem que ser capaz de adicionar novos gêneros e autores para usar no cadastro de livros. 
+- Título
+- Autor
+- Gênero
+- Quantidade de cópias
+
+Gabriel tem que ser capaz de adicionar novos gêneros e autores para usar no cadastro de livros.
 
 ### Obs.: instância do SQL Server deve estar conectado ao localhost
 
 ## Frameworks aplicadas no projeto
 
-
 **Atenção** - Informe quais recursos de terceriros foram utilizados no projeto e descreva o por quê.
 
+## Experiência com o projeto
 
-## Experiência com o projeto 
-    # Descreva sua experiênca com o projeto, tanto na parte técnica quanto na parte teórica.
+Com este projecto consegui desenvolver mais os meus conhecimento na linguagem c# e no framework asp.net.core,
+pensando na arquitetura de software, nas tuas relações etc.
+
+E a simplicidade da mesma aplicação agredou valor no acto de desenvolvimento da mesma.
+Foi desenvolvido com bastante entrega, de modo a ter como resultado não apenas um projecto mas
+um projecto com qualidade por ser o foco.
 
 ## Futuro
 
-Descreva sobre possíveis planos para este projeto, melhorias ou alterações que você realizaria em prol de aumentar a qualidade no desenvolvimento.
+Futura mente acredito que podemos adicionar um modelo de negócio a mesma aplicação de modo a fazer com que ela seja a base para
+várias provedoras de livros, adicionar talvez algumas funcionalidades que complementariam esse recurso e fechar a mesma.
 
 **ATENÇÃO**
 
@@ -47,12 +68,12 @@ Depois de implementar a solução, envie um pull request para este repositório 
 O nome da branch deve seguir o seguinte padrão: **nome-sobrenome**.
 
 O processo de Pull Request funciona da seguinte maneira:
+
 1. Faça um fork deste repositório (não clonar direto!);
 2. Faça seu projeto neste fork;
 3. Commit e suba as alterações para o SEU fork;
 4. Pela interface do Github, envie um Pull Request.
 5. Deixe o fork público para facilitar a inspeção do código.
-
 
 Obs.: Não tente fazer o PUSH diretamente para ESTE repositório!
 
