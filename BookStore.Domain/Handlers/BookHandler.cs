@@ -25,9 +25,7 @@ public class BookHandler :
         var bookRequestDTO = new Book(
             title: command.Title,
             authorId: command.AuthorId,
-            author: command.Author,
             genreId: command.GenreId,
-            genre: command.Genre,
             numberOfCopies: command.NumberOfCopies
         );
 
@@ -46,9 +44,7 @@ public class BookHandler :
         filteredBookRequestDTO.UpdateBook(
             title: command.Title,
             authorId: command.AuthorId,
-            author: command.Author,
             genreId: command.GenreId,
-            genre: command.Genre,
             numberOfCopies: command.NumberOfCopies
         );
 
