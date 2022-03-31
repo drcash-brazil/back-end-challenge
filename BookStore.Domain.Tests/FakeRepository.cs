@@ -10,6 +10,11 @@ public class FakeRepository : IAuthorRepository
     public void Create(Author entity)
     { }
 
+    public bool Delete(Guid id)
+    {
+        return false;
+    }
+
     public IEnumerable<Author> GetAll()
     {
         return new List<Author>();
