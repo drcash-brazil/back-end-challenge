@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "mrrriOuewFjvO37WebxmL9Snhr+3XhkKqI7Kv3udlEy3ExrfqFRhFTTdSYsPn/DqzJNJILkULKINOrJHi9ynpQ==",
+  "success": true,
+  "projectFilePath": "/home/antonio/Documentos/projects/Tests/BookStore/BookStore.Domain.Api/BookStore.Domain.Api.csproj",
+  "expectedPackageFiles": [
+    "/home/antonio/.nuget/packages/microsoft.extensions.apidescription.server/3.0.0/microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "/home/antonio/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
+    "/home/antonio/.nuget/packages/swashbuckle.aspnetcore/6.2.3/swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "/home/antonio/.nuget/packages/swashbuckle.aspnetcore.swagger/6.2.3/swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "/home/antonio/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.2.3/swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "/home/antonio/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.2.3/swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}

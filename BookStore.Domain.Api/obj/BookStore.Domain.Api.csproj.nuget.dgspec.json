@@ -1,0 +1,69 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/antonio/Documentos/projects/Tests/BookStore/BookStore.Domain.Api/BookStore.Domain.Api.csproj": {}
+  },
+  "projects": {
+    "/home/antonio/Documentos/projects/Tests/BookStore/BookStore.Domain.Api/BookStore.Domain.Api.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/antonio/Documentos/projects/Tests/BookStore/BookStore.Domain.Api/BookStore.Domain.Api.csproj",
+        "projectName": "BookStore.Domain.Api",
+        "projectPath": "/home/antonio/Documentos/projects/Tests/BookStore/BookStore.Domain.Api/BookStore.Domain.Api.csproj",
+        "packagesPath": "/home/antonio/.nuget/packages/",
+        "outputPath": "/home/antonio/Documentos/projects/Tests/BookStore/BookStore.Domain.Api/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/antonio/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.2.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.201/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
