@@ -8,4 +8,9 @@ public class Author : Entity
     }
 
     public string Name { get; private set; } = String.Empty;
+
+    public void UpdateAuthor(string name)
+    {
+        Name = name;
+    }
 }
