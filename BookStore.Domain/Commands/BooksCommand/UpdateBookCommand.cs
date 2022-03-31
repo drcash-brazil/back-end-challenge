@@ -7,7 +7,7 @@ public class UpdateBookCommand : ICommand
 {
     public UpdateBookCommand()
     { }
-    public UpdateBookCommand(Guid id, string title, int authorId, Author? author, int genreId, Genre? genre, int numberOfCopies)
+    public UpdateBookCommand(Guid id, string title, Guid authorId, Author? author, Guid genreId, Genre? genre, int numberOfCopies)
     {
         Id = id;
         Title = title;
@@ -20,9 +20,9 @@ public class UpdateBookCommand : ICommand
 
     public Guid Id { get; set; }
     public string Title { get; set; } = String.Empty;
-    public int AuthorId { get; set; }
+    public Guid AuthorId { get; set; }
     public Author? Author { get; set; }
-    public int GenreId { get; set; }
+    public Guid GenreId { get; set; }
     public Genre? Genre { get; set; }
     public int NumberOfCopies { get; set; }
     public bool Validate()
