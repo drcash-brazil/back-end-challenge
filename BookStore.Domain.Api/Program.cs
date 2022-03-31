@@ -1,8 +1,24 @@
+using BookStore.Domain.Handlers;
+using BookStore.Domain.Infra.Context;
+using BookStore.Domain.Infra.Repositories;
+using BookStore.Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddDbContext<DataContext>(
+    opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("connectionString"))
+);
+
+builder.Services.AddTransient<IAuthorRepository, AuthorRepository>();
+builder.Services.AddTransient<IGenreRepository, GenreRepository>();
+builder.Services.AddTransient<AuthorHandler, AuthorHandler>();
+builder.Services.AddTransient<GenreHandler, GenreHandler>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -17,6 +33,14 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseRouting();
+
+app.UseCors(x =>
+    x.AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+);
 
 app.UseAuthorization();
 
