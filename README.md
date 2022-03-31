@@ -45,7 +45,13 @@ Gabriel tem que ser capaz de adicionar novos gêneros e autores para usar no cad
 
 ## Frameworks aplicadas no projeto
 
-**Atenção** - Informe quais recursos de terceriros foram utilizados no projeto e descreva o por quê.
+Os framewors que foram utilizados no projecto são;
+
+- Microsoft.EntityFrameworkCore.Design
+- Microsoft.EntityFrameworkCore.InMemory
+- Microsoft.EntityFrameworkCore.Relational
+- Microsoft.EntityFrameworkCore.SqlServer
+- Microsoft.EntityFrameworkCore.Tools
 
 ## Experiência com o projeto
 
