@@ -1660,6 +1660,16 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
+      },
+      "BookStore.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/BookStore.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BookStore.Domain.dll": {}
+        }
       }
     }
   },
@@ -6193,10 +6203,16 @@
         "system.xml.xdocument.4.3.0.nupkg.sha512",
         "system.xml.xdocument.nuspec"
       ]
+    },
+    "BookStore.Domain/1.0.0": {
+      "type": "project",
+      "path": "../BookStore.Domain/BookStore.Domain.csproj",
+      "msbuildProject": "../BookStore.Domain/BookStore.Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "BookStore.Domain >= 1.0.0",
       "MSTest.TestAdapter >= 2.2.7",
       "MSTest.TestFramework >= 2.2.7",
       "Microsoft.NET.Test.Sdk >= 16.11.0",
@@ -6227,7 +6243,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/home/antonio/Documentos/projects/Tests/BookStore/BookStore.Domain/BookStore.Domain.csproj": {
+              "projectPath": "/home/antonio/Documentos/projects/Tests/BookStore/BookStore.Domain/BookStore.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

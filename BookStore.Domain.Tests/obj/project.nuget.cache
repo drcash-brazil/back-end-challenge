@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "9wQYNuH+orPsL4zmotvOQWAqODAe8Gpct0aBXbCbw7AsS0vqQ/KZlf6GjyqB2/gdo+8T0K73KpssCSonABZJhw==",
+  "dgSpecHash": "qU+ajopJRggwBbpbFG7P3k7RYaG/KXHU+Seih+3CWTdY8MaGAOMn1xEnI7CDzgPf+6pqz1vE/Yye2cs7xwI1Gg==",
   "success": true,
   "projectFilePath": "/home/antonio/Documentos/projects/Tests/BookStore/BookStore.Domain.Tests/BookStore.Domain.Tests.csproj",
   "expectedPackageFiles": [
