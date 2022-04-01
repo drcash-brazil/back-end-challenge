@@ -16,8 +16,10 @@ builder.Services.AddDbContext<DataContext>(
 
 builder.Services.AddTransient<IAuthorRepository, AuthorRepository>();
 builder.Services.AddTransient<IGenreRepository, GenreRepository>();
+builder.Services.AddTransient<IBookRepository, BookRepository>();
 builder.Services.AddTransient<AuthorHandler, AuthorHandler>();
 builder.Services.AddTransient<GenreHandler, GenreHandler>();
+builder.Services.AddTransient<BookHandler, BookHandler>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
