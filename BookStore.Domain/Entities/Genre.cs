@@ -14,7 +14,7 @@ public class Genre : Entity
     [JsonIgnore]
     public Guid BookId { get; set; }
     [JsonIgnore]
-    public Book Book { get; set; }
+    public Book? Book { get; set; }
 
     public void UpdateGenre(string name)
     {
