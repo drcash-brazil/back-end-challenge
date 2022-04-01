@@ -45,11 +45,11 @@ public class DataContext : DbContext
         modelBuilder.Entity<Genre>()
             .HasOne(p => p.Book)
             .WithOne(b => b.Genre)
-            .HasForeignKey<Book>(p => p.Id);
+            .HasForeignKey<Book>(p => p.GenreId);
 
         modelBuilder.Entity<Author>()
             .HasOne(p => p.Book)
             .WithOne(b => b.Author)
-            .HasForeignKey<Book>(p => p.Id);
+            .HasForeignKey<Book>(p => p.AuthorId);
     }
 }
