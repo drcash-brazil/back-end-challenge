@@ -46,6 +46,7 @@ namespace BookStore.Domain.Infra.Migrations
             modelBuilder.Entity("BookStore.Domain.Entities.Book", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("AuthorId")
@@ -63,6 +64,12 @@ namespace BookStore.Domain.Infra.Migrations
                         .HasColumnType("varchar(80)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorId")
+                        .IsUnique();
+
+                    b.HasIndex("GenreId")
+                        .IsUnique();
 
                     b.ToTable("Book", (string)null);
                 });
@@ -92,13 +99,13 @@ namespace BookStore.Domain.Infra.Migrations
                 {
                     b.HasOne("BookStore.Domain.Entities.Author", "Author")
                         .WithOne("Book")
-                        .HasForeignKey("BookStore.Domain.Entities.Book", "Id")
+                        .HasForeignKey("BookStore.Domain.Entities.Book", "AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BookStore.Domain.Entities.Genre", "Genre")
                         .WithOne("Book")
-                        .HasForeignKey("BookStore.Domain.Entities.Book", "Id")
+                        .HasForeignKey("BookStore.Domain.Entities.Book", "GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -114,8 +121,7 @@ namespace BookStore.Domain.Infra.Migrations
 
             modelBuilder.Entity("BookStore.Domain.Entities.Genre", b =>
                 {
-                    b.Navigation("Book")
-                        .IsRequired();
+                    b.Navigation("Book");
                 });
 #pragma warning restore 612, 618
         }
