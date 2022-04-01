@@ -4,16 +4,51 @@ Seja bem-vindo ao repositório do projeto Bookstore, um caso de uso que deve ser
 
 # Para Startar o projecto
 
+A aplicação foi desenvolvida com dotnet na versão 6.
+
 Criei um shell que facilitaria rodar a aplicação uma vez que foi trabalhado em camadas, para não ter que percorrer entre as pastas,
 a outra coisa eu usei uma instância local para conexão porêm a partir da imagem que gerei no Docker na minha maquina.
 
 Para alteração basta entrar em `BookStore.Domain.Api - appSettings.json e appSettings.Development.json` e alterar a connectionString para
-**Server=localhos\\SQLEXPRESS,1433;Database=bookStore;User ID=sa;Password=''** e a aplicação funciona lindamente
+**Server=localhos\\SQLEXPRESS,1433;Database=BookStore;User ID=sa;Password=''** e a aplicação funciona lindamente
 
 O scripts a ser gerados
 
-```bash
+Criar antes a base de dados `BookStore`
 
+Para executar as migrações na base de dados
+
+```bash
+bash migration.sh
+```
+
+Para rodar a aplicação
+
+```bash
+bash script.sh
+```
+
+Payload para criação do book
+
+```json
+{
+  "title": "Hard book 12",
+  "authorId": "f95b1713-4c2c-439d-9657-8ad669c7bf83",
+  "genreId": "ec2a83a5-6846-4075-bc5e-c631f5c6698d",
+  "numberOfCopies": 20
+}
+```
+
+Payload para actualização do book
+
+```json
+{
+  "id": "e3034aed-0bb4-45e3-9b91-fbc23af67c99",
+  "title": "Hard book 12",
+  "authorId": "f95b1713-4c2c-439d-9657-8ad669c7bf83",
+  "genreId": "ec2a83a5-6846-4075-bc5e-c631f5c6698d",
+  "numberOfCopies": 20
+}
 ```
 
 ## Afinal, o que é esse desafio?
