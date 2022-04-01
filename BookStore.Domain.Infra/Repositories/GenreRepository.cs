@@ -28,7 +28,7 @@ public class GenreRepository : IGenreRepository
 
     public Genre GetById(Guid id)
     {
-        return _context.Genre
+        return _context.Genre?
             .AsNoTracking()
             .FirstOrDefault(x => x.Id == id);
     }
