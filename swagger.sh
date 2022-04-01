@@ -1,3 +1,3 @@
 cd BookStore.Domain.Api/
 
-dotnet run
+dotnet watch run
