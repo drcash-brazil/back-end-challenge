@@ -28,6 +28,12 @@ Para rodar a aplicação
 bash script.sh
 ```
 
+Para visualização da documentação
+
+```bash
+bash swagger.sh
+```
+
 Payload para criação do book
 
 ```json
